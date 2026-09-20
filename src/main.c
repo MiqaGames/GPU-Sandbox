@@ -14,13 +14,13 @@ int main(void)
     printf("---------------------------------- NEW RUN --------------------------------------------\n");
 
     Instruction program[] = {
-        {OP_JUMP, 2},
-        {OP_HALT},
+        {OP_JUMP, 2, 0, 0},
+        {OP_HALT, 0, 0, 0},
         {OP_ADD, 0, 0, 1},
-        {OP_CMP, 0, 7},
-        {OP_JIF, 1, SAME},
-        {OP_JIF, 2, LESS},
-        {OP_HALT}
+        {OP_CMP, 0, 7, 0},
+        {OP_JIF, 1, SAME, 0},
+        {OP_JIF, 2, LESS, 0},
+        {OP_HALT, 0, 0, 0}
     };
     
     Core core = {0};

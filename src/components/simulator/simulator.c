@@ -2,8 +2,7 @@
 
 #include <stdio.h>
 
-
-int32_t max_cycles = MAX_CYCLES;
+uint32_t max_cycles = MAX_CYCLES;
 uint32_t cycles = 0;
 
 void run(Core *core, const Instruction *program, size_t program_size, Memory *memory){ // инициализация ядра процессора и запуск программы
