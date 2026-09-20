@@ -115,15 +115,6 @@ bool checker_address_register(uint32_t checkvar, Core *core){
     }
     return true;
 }
-bool checker_memory_address(uint32_t checkvar, Core *core){
-    if (checkvar >= MEMORY_SIZE){
-        core->current_state = ERROR;
-        printf("Error: Invalid memory address %u\n", checkvar);
-        return false;
-    }
-    return true;
-}
-
 bool checker_source_register(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
@@ -132,6 +123,7 @@ bool checker_source_register(uint32_t checkvar, Core *core){
     }
     return true;
 }
+
 bool checker_condition_register(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
@@ -144,6 +136,14 @@ bool checker_target_register(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
         printf("Error: Invalid target register index %u\n", checkvar);
+        return false;
+    }
+    return true;
+}
+bool checker_memory_address(uint32_t checkvar, Core *core){
+    if (checkvar >= MEMORY_SIZE){
+        core->current_state = ERROR;
+        printf("Error: Invalid memory address %u\n", checkvar);
         return false;
     }
     return true;
