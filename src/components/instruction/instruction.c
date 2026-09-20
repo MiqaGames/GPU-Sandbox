@@ -75,14 +75,17 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, size_t 
             break;
 
         case OP_CMP:
-            if (checker_destination(instruction->a, core) && checker_source_register(instruction->b, core))
-                if (core->registers[instruction->a] > core->registers[instruction->b]){
+            if (checker_destination(instruction->a, core) && checker_source_register(instruction->b, core)) {
+                if (core->registers[instruction->a] > core->registers[instruction->b]) {
                     core->flag = GREATHER;
                 }
-                else if (core->registers[instruction->a] < core->registers[instruction->b]){
+                else if (core->registers[instruction->a] < core->registers[instruction->b]) {
                     core->flag = LESS;
                 }
-                else core->flag = SAME;
+                else {
+                    core->flag = SAME;
+                }
+            }
             break;
 
         case OP_HALT:

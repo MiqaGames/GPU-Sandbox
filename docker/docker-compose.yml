@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker/DockerFile
+    working_dir: /app
+    command: ./app
+    stdin_open: true
+    tty: true

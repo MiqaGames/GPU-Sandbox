@@ -10,7 +10,7 @@
 
 #define MAX_CYCLES 1000000
 
-extern int32_t max_cycles;
+extern uint32_t max_cycles;
 extern uint32_t cycles;
 
 void run(Core *core, const Instruction *program, size_t program_size, Memory *memory);

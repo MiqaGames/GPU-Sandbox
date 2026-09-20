@@ -1,0 +1,16 @@
+FROM gcc:13
+
+WORKDIR /app
+
+COPY . .
+
+RUN gcc -std=c11 -Wall -Wextra -I src \
+    src/main.c \
+    src/components/core/core.c \
+    src/components/debug/debug.c \
+    src/components/instruction/instruction.c \
+    src/components/memory/memory.c \
+    src/components/simulator/simulator.c \
+    -o app
+
+CMD ["./app"]
