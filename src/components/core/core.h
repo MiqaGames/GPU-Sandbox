@@ -2,6 +2,7 @@
 #define CORE_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 #define REGISTERS_COUNT 8
 

@@ -14,23 +14,18 @@ int main(void)
     printf("---------------------------------- NEW RUN --------------------------------------------\n");
 
     Instruction program[] = {
-        {OP_JUMP, 2, 0, 0},
-        {OP_HALT, 0, 0, 0},
-        {OP_ADD, 0, 0, 1},
-        {OP_CMP, 0, 7, 0},
-        {OP_JIF, 1, SAME, 0},
-        {OP_JIF, 2, LESS, 0},
-        {OP_HALT, 0, 0, 0}
+        {OP_ADD, 0,0,0},
+        {OP_HALT}
     };
     
     Core core = {0};
     for (int i = 0; i < REGISTERS_COUNT; i++){
-        core.registers[i] = i+1;
+        core.registers[i] = (REGISTERS_COUNT-1 - i) * 3;
     }
     core.current_state = NORMAL;
     size_t program_size = sizeof(program) / sizeof(program[0]);
     Memory mem = {0};
-    mem.data[10] = 1;
+    core.registers[REGISTERS_COUNT/2] = 50;
 
     run(&core, program, program_size, &mem);
     print_registers(&core);
