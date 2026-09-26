@@ -1,11 +1,17 @@
 \babel@toc {russian}{}\relax 
-\contentsline {section}{\numberline {1}Назначение программы}{2}{}%
-\contentsline {section}{\numberline {2}Архитектура}{2}{}%
-\contentsline {subsection}{\numberline {2.1}Memory}{2}{}%
-\contentsline {subsection}{\numberline {2.2}Core}{2}{}%
-\contentsline {subsubsection}{\numberline {2.2.1}Регистры}{2}{}%
-\contentsline {subsubsection}{\numberline {2.2.2}Программный счётчик}{2}{}%
-\contentsline {subsubsection}{\numberline {2.2.3}Текущее состояние}{2}{}%
-\contentsline {subsection}{\numberline {2.3}Instructions}{3}{}%
-\contentsline {subsubsection}{\numberline {2.3.1}Операнды}{3}{}%
-\contentsline {subsubsection}{\numberline {2.3.2}Opcode}{3}{}%
+\contentsline {section}{\numberline {1}Назначение программы}{2}{section.1}%
+\contentsline {section}{\numberline {2}Архитектура проекта}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Память}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Ядро процессора}{3}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Регистры}{3}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Программный счётчик}{3}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Флаги состояния}{3}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Состояния ядра}{3}{subsubsection.2.2.4}%
+\contentsline {section}{\numberline {3}Инструкции виртуального процессора}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Параметры инструкций}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Поддерживаемые операции}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Симулятор выполнения}{6}{section.4}%
+\contentsline {section}{\numberline {5}Проверка корректности входных данных}{6}{section.5}%
+\contentsline {section}{\numberline {6}Отладочный вывод}{7}{section.6}%
+\contentsline {section}{\numberline {7}Сброс и инициализация}{7}{section.7}%
+\contentsline {section}{\numberline {8}Тестирование}{7}{section.8}%

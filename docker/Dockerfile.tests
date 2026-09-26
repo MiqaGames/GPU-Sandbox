@@ -1,0 +1,13 @@
+FROM gcc:13
+
+WORKDIR /app
+
+COPY . /app
+
+RUN gcc -std=c11 -I src tests/test_core.c src/components/core/core.c -o tests/test_core.exe && \
+    gcc -std=c11 -I src tests/test_memory.c src/components/memory/memory.c -o tests/test_memory.exe && \
+    gcc -std=c11 -I src tests/test_instruction.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c -o tests/test_instruction.exe && \
+    gcc -std=c11 -I src tests/test_simulator.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/simulator/simulator.c -o tests/test_simulator.exe && \
+    gcc -std=c11 -I src tests/test_debug.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/debug/debug.c -o tests/test_debug.exe
+
+CMD ["sh", "-lc", "./tests/test_core.exe && ./tests/test_memory.exe && ./tests/test_instruction.exe && ./tests/test_simulator.exe && ./tests/test_debug.exe"]

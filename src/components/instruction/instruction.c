@@ -66,7 +66,7 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, size_t 
             if (checker_destination(instruction->a, core) && checker_source_register(instruction->b, core) && checker_source_register(instruction->c, core)){
                 if (core->registers[instruction->c] == 0){
                     core->current_state = ERROR;
-                    printf("ERROR: Division by zero\n");
+                    printf("Error: Division by zero\n");
                     return;
                 }
                 core->registers[instruction->a] = core->registers[instruction->b] / core->registers[instruction->c];

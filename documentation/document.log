@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.15)  18 SEP 2026 15:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.15)  26 SEP 2026 13:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -322,36 +322,157 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 \float@box=\box55
 \@float@everytoks=\toks23
 \@floatcapt=\box56
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty
+Package: array 2026/02/24 v2.7b Tabular extension package (FMi)
+\col@sep=\dimen164
+\ar@mcellbox=\box57
+\extrarowheight=\dimen165
+\NC@list=\toks24
+\extratabsurround=\skip51
+\backup@length=\skip52
+\ar@cellbox=\box58
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/enumitem\enumitem.sty
+Package: enumitem 2025/02/06 v3.11 Customized lists
+\labelindent=\skip53
+\enit@outerparindent=\dimen166
+\enit@toks=\toks25
+\enit@inbox=\box59
+\enit@count@id=\count298
+\enitdp@description=\count299
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+Package: hyperref 2026-06-17 v7.01r Hypertext links for LaTeX
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+Package: nameref 2026-01-29 v2.58 Cross-referencing by name of section
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+))
+\c@section@level=\count300
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/10/02 v2.5m e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count301
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen167
+\Hy@linkcounter=\count302
+\Hy@pagecounter=\count303
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+File: pd1enc.def 2026-06-17 v7.01r Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count304
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def
+File: puenc.def 2026-06-17 v7.01r Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `unicode' set `true' on input line 3164.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4070.
+Package hyperref Info: Hyper figures OFF on input line 4199.
+Package hyperref Info: Link nesting OFF on input line 4204.
+Package hyperref Info: Hyper index ON on input line 4207.
+Package hyperref Info: Plain pages OFF on input line 4214.
+Package hyperref Info: Backreferencing OFF on input line 4219.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4466.
+\c@Hy@tempcnt=\count305
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty
+\Urlmuskip=\muskip17
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4805.
+\XeTeXLinkMargin=\dimen168
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count306
+\Field@Width=\dimen169
+\Fld@charsize=\dimen170
+Package hyperref Info: Hyper figures OFF on input line 6091.
+Package hyperref Info: Link nesting OFF on input line 6096.
+Package hyperref Info: Hyper index ON on input line 6099.
+Package hyperref Info: backreferencing OFF on input line 6106.
+Package hyperref Info: Link coloring ON on input line 6109.
+Package hyperref Info: Link coloring with OCG OFF on input line 6116.
+Package hyperref Info: PDF/A mode OFF on input line 6121.
+\Hy@abspage=\count307
+\c@Item=\count308
+\c@Hfootnote=\count309
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+File: hpdftex.def 2026-06-17 v7.01r Hyperref driver for pdfTeX
+\Fld@listcount=\count310
+\c@bookmark@seq@number=\count311
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfilecheck.sty
+Package: rerunfilecheck 2025-06-21 v1.11 Rerun checks for auxiliary files (HO)
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 284.
+)
+\Hy@SectionHShift=\skip54
 ) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 ) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2025/11/14 1.11b (Carsten Heinz)
 ) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\l3backend-pdftex.def
 File: l3backend-pdftex.def 2026-08-10 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count298
+\l__color_backend_stack_int=\count312
 ) (document.aux
 Package babel Info: 'russian' activates 'russian' shorthands.
-(babel)             Reported on input line 5.
+(babel)             Reported on input line 8.
 )
 \openout1 = `document.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 39.
-LaTeX Font Info:    ... okay on input line 39.
-LaTeX Info: Redefining \th on input line 39.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T2A/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Info: Redefining \th on input line 40.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -387,9 +508,36 @@ LaTeX Info: Redefining \th on input line 39.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count299
+\c@lstlisting=\count313
+(C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+Package: color 2026-05-17 v1.3f Standard LaTeX Color (DPC)
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2025/09/29 v1.2d Graphics/color driver for pdftex
+ (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count314
+\scratchdimen=\dimen171
+\scratchbox=\box60
+\nofMPsegments=\count315
+\nofMParguments=\count316
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count317
+\MPscratchDim=\dimen172
+\MPnumerator=\count318
+\makeMPintoPDFobject=\count319
+\everyMPtoPDFconversion=\toks27
+)) (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx))
+Package hyperref Info: Link coloring ON on input line 40.
+ (document.out) (document.out)
+\@outlinefile=\write3
+\openout3 = `document.out'.
+
 Package babel Info: Main language set to 'russian'.
-(document.toc
+ (document.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 4.
 LaTeX Font Info:    External font `cmex10' loaded for size
@@ -397,38 +545,151 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 4.
 )
-\tf@toc=\write3
-\openout3 = `document.toc'.
+\tf@toc=\write4
+\openout4 = `document.toc'.
 
  [1
 
 {C:/Users/123/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
-LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 58.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 50.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 50.
+LaTeX Font Info:    Trying to load font information for T2A+cmtt on input line 64.
  (C:\Users\123\AppData\Local\Programs\MiKTeX\tex/latex/cyrillic\t2acmtt.fd
 File: t2acmtt.fd 2001/08/11 v1.0a Computer Modern Cyrillic font definitions
-) [2]
-Overfull \hbox (152.14845pt too wide) in paragraph at lines 181--229
- [][] 
+)
+Overfull \hbox (47.4811pt too wide) in paragraph at lines 77--79
+\T2A/cmtt/m/n/12 Memory \T2A/cmr/m/n/12 --- это струк-ту-ра вир-ту-аль-ной па-мя-ти, хра-ня-щая дан-ные в мас-си-ве \T2A/cmtt/m/n/12 data[MEMORY_SIZE]\T2A/cmr/m/n/12 . 
  []
 
-[3] [4] (document.aux)
+
+Overfull \hbox (13.68445pt too wide) in paragraph at lines 86--87
+[]\T2A/cmtt/m/n/12 memory_write(Memory *memory, uint32_t address, uint8_t value) \T2A/cmr/m/n/12 --- за-пись бай-
+ []
+
+[2]
+Overfull \hbox (3.68909pt too wide) in paragraph at lines 122--123
+\T2A/cmtt/m/n/12 current_state \T2A/cmr/m/n/12 управ-ля-ет по-ве-де-ни-ем вы-пол-не-ния про-грам-мы. На-бор со-сто-я-ний пред-
+ []
+
+
+Overfull \hbox (17.96683pt too wide) in paragraph at lines 132--133
+\T2A/cmr/m/n/12 грам-ма вы-пол-ня-ет-ся слиш-ком дол-го, то сра-ба-ты-ва-ет тай-маут по пе-ре-мен-ной \T2A/cmtt/m/n/12 MAX_CYCLES\T2A/cmr/m/n/12 . 
+ []
+
+LaTeX Font Info:    Font shape `T2A/cmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T2A/cmtt/m/n' tried instead on input line 139.
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 182--182
+[]|\T2A/cmr/m/n/12 регистр с
+ []
+
+
+Underfull \hbox (badness 1721) in paragraph at lines 182--183
+[]|\T2A/cmr/m/n/12 Чтение зна-че-ния из
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 182--183
+\T2A/cmr/m/n/12 па-мя-ти по ад-ре-су
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--184
+[]|\T2A/cmr/m/n/12 регистр с
+ []
+
+
+Underfull \hbox (badness 3601) in paragraph at lines 184--184
+[]|\T2A/cmr/m/n/12 регистр со
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
+[]|\T2A/cmr/m/n/12 Запись зна-че-ния
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 186--187
+[]|\T2A/cmr/m/n/12 Сложение \T2A/cmtt/m/n/12 reg[b] +
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
+[]|\T2A/cmr/m/n/12 Деление \T2A/cmtt/m/n/12 reg[b] /
+ []
+
+
+Underfull \hbox (badness 2469) in paragraph at lines 192--193
+\T2A/cmtt/m/n/12 reg[c] \T2A/cmr/m/n/12 с про-вер-кой
+ []
+
+
+Underfull \hbox (badness 2205) in paragraph at lines 194--194
+[]|\T2A/cmr/m/n/12 индекс ин-
+ []
+
+
+Underfull \hbox (badness 1137) in paragraph at lines 194--195
+\T2A/cmr/m/n/12 к ин-струк-ции с ин-
+ []
+
+
+Underfull \hbox (badness 2922) in paragraph at lines 194--195
+\T2A/cmr/m/n/12 дек-сом, хра-ня-щим-ся
+ []
+
+
+Underfull \hbox (badness 5260) in paragraph at lines 196--197
+[]|\T2A/cmr/m/n/12 Сравнение зна-че-ний
+ []
+
+
+Underfull \hbox (badness 2205) in paragraph at lines 198--198
+[]|\T2A/cmr/m/n/12 индекс ин-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--198
+[]|\T2A/cmr/m/n/12 ожидаемый
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
+[]|\T2A/cmr/m/n/12 Условный пе-ре-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
+\T2A/cmr/m/n/12 ход: ес-ли \T2A/cmtt/m/n/12 b ==
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 198--199
+\T2A/cmtt/m/n/12 core->flag\T2A/cmr/m/n/12 , яд-ро
+ []
+
+[4] [5] [6] [7] (document.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-08-10>
  ***********
+Package rerunfilecheck Info: File `document.out' has not changed.
+(rerunfilecheck)             Checksum: C04401F60F3BE82E86D7903A8B229A14;3231.
  ) 
 Here is how much of TeX's memory you used:
- 4820 strings out of 467441
- 81746 string characters out of 5408563
- 690971 words of memory out of 5000000
- 34113 multiletter control sequences out of 15000+600000
- 637315 words of font info for 58 fonts, out of 8000000 for 9000
+ 13486 strings out of 467441
+ 212640 string characters out of 5408563
+ 838398 words of memory out of 5000000
+ 42592 multiletter control sequences out of 15000+600000
+ 641984 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 48i,9n,53p,378b,280s stack positions out of 10000i,1000n,20000p,200000b,200000s
- <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\lati1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1440.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1728.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm2074.pk><C:/Users/123/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb>
-Output written on document.pdf (4 pages, 105757 bytes).
+ 74i,9n,79p,707b,2121s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt1095.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm0600.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\lati1000.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1000.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm0700.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1440.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm0800.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1728.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm2074.pk>
+Output written on document.pdf (7 pages, 174399 bytes).
 PDF statistics:
- 289 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 617 PDF objects out of 1000 (max. 8388607)
+ 62 named destinations out of 1000 (max. 500000)
+ 129 words of extra memory for PDF output out of 10000 (max. 10000000)
 

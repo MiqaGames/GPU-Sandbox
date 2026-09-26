@@ -2,17 +2,36 @@
 \providecommand \babel@aux [2]{\global \let \babel@toc \@gobbletwo }
 \@nameuse{bbl@beforestart}
 \catcode `"\active 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
 \babel@aux{russian}{}
-\@writefile{toc}{\contentsline {section}{\numberline {1}Назначение программы}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {2}Архитектура}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Memory}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Core}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Регистры}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Программный счётчик}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Текущее состояние}{2}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Instructions}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Операнды}{3}{}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Opcode}{3}{}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Набор инструкций виртуального процессора}}{4}{}\protected@file@percent }
-\newlabel{tab:opcodes}{{1}{4}{}{table.1}{}}
-\gdef \@abspage@last{4}
+\@writefile{toc}{\contentsline {section}{\numberline {1}Назначение программы}{2}{section.1}\protected@file@percent }
+\newlabel{sec:purpose}{{1}{2}{Назначение программы}{section.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Архитектура проекта}{2}{section.2}\protected@file@percent }
+\newlabel{sec:architecture}{{2}{2}{Архитектура проекта}{section.2}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Ключевые компоненты архитектуры}}{2}{table.1}\protected@file@percent }
+\newlabel{tab:components}{{1}{2}{Ключевые компоненты архитектуры}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Память}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Ядро процессора}{3}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Регистры}{3}{subsubsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Программный счётчик}{3}{subsubsection.2.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Флаги состояния}{3}{subsubsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}Состояния ядра}{3}{subsubsection.2.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Инструкции виртуального процессора}{4}{section.3}\protected@file@percent }
+\newlabel{sec:instructions}{{3}{4}{Инструкции виртуального процессора}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Параметры инструкций}{4}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Поддерживаемые операции}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Набор инструкций}}{5}{table.2}\protected@file@percent }
+\newlabel{tab:instructions}{{2}{5}{Набор инструкций}{table.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Симулятор выполнения}{6}{section.4}\protected@file@percent }
+\newlabel{sec:simulator}{{4}{6}{Симулятор выполнения}{section.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Проверка корректности входных данных}{6}{section.5}\protected@file@percent }
+\newlabel{sec:validation}{{5}{6}{Проверка корректности входных данных}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Отладочный вывод}{7}{section.6}\protected@file@percent }
+\newlabel{sec:debug}{{6}{7}{Отладочный вывод}{section.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Сброс и инициализация}{7}{section.7}\protected@file@percent }
+\newlabel{sec:reset}{{7}{7}{Сброс и инициализация}{section.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Тестирование}{7}{section.8}\protected@file@percent }
+\newlabel{sec:testing}{{8}{7}{Тестирование}{section.8}{}}
+\gdef \@abspage@last{7}
