@@ -7,4 +7,5 @@ void core_reset(Core *core)
     }
     core->pc = 0;
     core->current_state = NORMAL;
+    core->flag = SAME;
 }

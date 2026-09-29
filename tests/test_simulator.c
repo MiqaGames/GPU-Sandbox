@@ -10,8 +10,6 @@ int main()
             {OP_HALT, 0, 0, 0},
             {OP_ADD, 0, 0, 1}
         };
-        max_cycles = 10;
-
         run(&core, program, 2, &memory);
         assert(core.current_state == HALT);
     }

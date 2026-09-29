@@ -6,6 +6,7 @@ void print_registers(const Core *core){
     {
         printf("R%d: %u\n", i, core->registers[i]);
     }
+    printf("\n");
 }
 
 void print_state(const Core *core){
@@ -31,17 +32,23 @@ void print_state(const Core *core){
             printf("UNKNOWN\n");
             break;
     }
+    printf("\n");
 }
 
 void print_program(const Instruction *program, size_t program_size){
     printf("Program:\n");
     for (size_t i = 0; i < program_size; i++)
     {
-        printf("Instruction %zu: Opcode %d, a: %u, b: %u, c: %u\n",
-               i,
+         printf("Instruction %llu: Opcode %d, a: %u, b: %u, c: %u\n",
+             (unsigned long long)i,
                (int)program[i].opcode,
                program[i].a,
                program[i].b,
                program[i].c);
     }
+    printf("\n");
+}
+
+void print_statistics(Statistics stats){
+    printf("STATISTICS: \nCycles: %" PRIu32 "\nInstruction executed: %" PRIu32 "\nLoads: %" PRIu32 "\nStores: %" PRIu32 "\nAdds: %" PRIu32 "\nSubs: %" PRIu32 "\nMuls: %" PRIu32 "\nDivs: %" PRIu32 "\nJumps: %" PRIu32 "\nConditional jumps: %" PRIu32 "\nChecks: %" PRIu32 "\n", stats.cycles, stats.instruction_executed, stats.loads, stats.stores, stats.adds, stats.subs, stats.muls, stats.divs, stats.jumps, stats.conditional_jumps, stats.checks);
 }

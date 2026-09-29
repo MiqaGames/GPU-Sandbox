@@ -1,6 +1,6 @@
 #ifndef INSTRUCTION_H
 #define INSTRUCTION_H
-
+#define MAX_PROGRAM_SIZE 256
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
