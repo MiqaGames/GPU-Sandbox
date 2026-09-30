@@ -76,6 +76,7 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, size_t 
             if (checker_destination(instruction->a, core) && checker_source_register(instruction->b, core) && checker_source_register(instruction->c, core)){
                 if (core->registers[instruction->c] == 0){
                     core->current_state = ERROR;
+                    stats.errors++;
                     printf("Error: Division by zero\n");
                     return;
                 }
@@ -106,6 +107,7 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, size_t 
 
         default:
             core->current_state = ERROR;
+            stats.errors++;
             printf("Error: Unknown opcode %d\n", instruction->opcode);
             break;
     }
@@ -117,6 +119,7 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, size_t 
 bool checker_destination(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
+        stats.errors++;
         printf("Error: Invalid destination register index %u\n", checkvar);
         return false;
     }
@@ -125,6 +128,7 @@ bool checker_destination(uint32_t checkvar, Core *core){
 bool checker_address_register(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
+        stats.errors++;
         printf("Error: Invalid address register index %u\n", checkvar);
         return false;
     }
@@ -133,6 +137,7 @@ bool checker_address_register(uint32_t checkvar, Core *core){
 bool checker_source_register(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
+        stats.errors++;
         printf("Error: Invalid source register index %u\n", checkvar);
         return false;
     }
@@ -142,6 +147,7 @@ bool checker_source_register(uint32_t checkvar, Core *core){
 bool checker_condition_register(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
+        stats.errors++;
         printf("Error: Invalid condition register index %u\n", checkvar);
         return false;
     }
@@ -150,6 +156,7 @@ bool checker_condition_register(uint32_t checkvar, Core *core){
 bool checker_target_register(uint32_t checkvar, Core *core){
     if (checkvar >= REGISTERS_COUNT){
         core->current_state = ERROR;
+        stats.errors++;
         printf("Error: Invalid target register index %u\n", checkvar);
         return false;
     }
@@ -158,6 +165,7 @@ bool checker_target_register(uint32_t checkvar, Core *core){
 bool checker_memory_address(uint32_t checkvar, Core *core){
     if (checkvar >= MEMORY_SIZE){
         core->current_state = ERROR;
+        stats.errors++;
         printf("Error: Invalid memory address %u\n", checkvar);
         return false;
     }
@@ -166,6 +174,7 @@ bool checker_memory_address(uint32_t checkvar, Core *core){
 bool checker_instruction_index(uint32_t checkvar, Core *core, size_t program_size){
     if (checkvar >= program_size){
         core->current_state = ERROR;
+        stats.errors++;
         printf("Error: Invalid instruction index %u\n", checkvar);
         return false;
     }

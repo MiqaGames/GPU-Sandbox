@@ -50,5 +50,5 @@ void print_program(const Instruction *program, size_t program_size){
 }
 
 void print_statistics(Statistics stats){
-    printf("STATISTICS: \nCycles: %" PRIu32 "\nInstruction executed: %" PRIu32 "\nLoads: %" PRIu32 "\nStores: %" PRIu32 "\nAdds: %" PRIu32 "\nSubs: %" PRIu32 "\nMuls: %" PRIu32 "\nDivs: %" PRIu32 "\nJumps: %" PRIu32 "\nConditional jumps: %" PRIu32 "\nChecks: %" PRIu32 "\n", stats.cycles, stats.instruction_executed, stats.loads, stats.stores, stats.adds, stats.subs, stats.muls, stats.divs, stats.jumps, stats.conditional_jumps, stats.checks);
+    printf("STATISTICS: \nCycles: %" PRIu32 "\nInstruction executed: %" PRIu32 "\nLoads: %" PRIu32 "\nStores: %" PRIu32 "\nAdds: %" PRIu32 "\nSubs: %" PRIu32 "\nMuls: %" PRIu32 "\nDivs: %" PRIu32 "\nJumps: %" PRIu32 "\nConditional jumps: %" PRIu32 "\nChecks: %" PRIu32 "\nErrors: %"PRIu32"\n", stats.cycles, stats.instruction_executed, stats.loads, stats.stores, stats.adds, stats.subs, stats.muls, stats.divs, stats.jumps, stats.conditional_jumps, stats.checks,stats.errors);
 }

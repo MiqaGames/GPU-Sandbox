@@ -27,6 +27,8 @@ typedef struct {
     uint32_t jumps;
     uint32_t conditional_jumps;
     uint32_t checks;
+
+    uint32_t errors;
 } Statistics;
 
 extern Statistics stats;
