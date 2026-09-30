@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdbool.h>
+
 #include "components/debug/debug.h"
 #include "components/core/core.h"
 #include "components/instruction/instruction.h"
@@ -14,41 +15,14 @@ int main(void)
     printf("---------------------------------- NEW RUN --------------------------------------------\n");
 
     Instruction program[MAX_PROGRAM_SIZE];
-    size_t program_size = 0, start_loop = 0, jif_pos = 0;
+    size_t program_size = 0;
     Core core = {0};
-    core.registers[0] = 0;
-    core.registers[1] = 1;
-    core.registers[2] = 10;
-
-    jif_pos = program_size;
-    program[program_size++] = (Instruction){OP_ADD, 0, 0, 1};
-    program[program_size++] = (Instruction){OP_CMP, 0, 2, 0};
-    program[program_size++] = (Instruction){OP_JIF, 0, LESS, 0};
-    jif_pos = program_size+1;
-    program[program_size++] = (Instruction){OP_JIF, (uint32_t)jif_pos, SAME, 0};
-    program[program_size++] = (Instruction){OP_MUL, 4, 0, 0};
-    program[program_size++] = (Instruction){OP_SUB, 5, 3, 4};
-
-    program[program_size++] = (Instruction){OP_SUB, 6, 5, 1};
-    program[program_size++] = (Instruction){OP_SUB, 6, 6, 1};
-    program[program_size++] = (Instruction){OP_SUB, 6, 6, 1};
-    start_loop = program_size;
-    program[program_size++] = (Instruction){OP_JUMP, (uint32_t) program_size+1, 0, 0};
-    program[program_size++] = (Instruction){OP_JUMP, 0, 0, 0};
-    jif_pos = program_size;
-
-    program[program_size++] = (Instruction){OP_ADD, 7, 7, 0};
-    program[program_size++] = (Instruction){OP_CMP, 7, 6, 0};
-    program[program_size++] = (Instruction){OP_JIF, (uint32_t)start_loop, LESS, 0};
-    program[program_size++] = (Instruction){OP_ADD, 4, 4, 7};
-    jif_pos = program_size;
-    program[program_size++] = (Instruction){OP_ADD, 4, 4, 1};
-    program[program_size++] = (Instruction){OP_CMP, 4, 3, 0};
-    program[program_size++] = (Instruction){OP_JIF, (uint32_t)jif_pos, LESS, 0};
-
-    
-
-
+    program[program_size++] = (Instruction){OP_LOAD, 0, 10, 0};
+    program[program_size++] = (Instruction){OP_LOAD, 1, 20, 0};
+    program[program_size++] = (Instruction){OP_LOAD, 2, 30, 0};
+    program[program_size++] = (Instruction){OP_ADD, 3, 0, 1};
+    program[program_size++] = (Instruction){OP_ADD, 3, 3, 2};
+    program[program_size++] = (Instruction){OP_STORE, 5, 3};
 
 
 
@@ -60,10 +34,9 @@ int main(void)
 
     core.current_state = NORMAL;
     Memory mem = {0};
-    core.registers[0] = 0;
-    core.registers[1] = 1;
-    core.registers[2] = 10;
-    core.registers[3] = 123;
+    mem.data[10] = 4;
+    mem.data[20] = 7;
+    mem.data[30] = 40;
     run(&core, program, program_size, &mem);
     print_registers(&core);
     print_state(&core);

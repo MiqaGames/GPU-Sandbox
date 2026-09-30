@@ -29,9 +29,8 @@ int main()
         Core core = {0};
         Memory memory = {0};
         memory_write(&memory, 10, 77);
-        core.registers[1] = 10;
 
-        Instruction load = {OP_LOAD, 0, 1, 0};
+        Instruction load = {OP_LOAD, 0, 10, 0};
         execute(&core, &load, &memory, 1);
         assert(core.registers[0] == 77 && core.current_state == NORMAL);
     }
@@ -39,10 +38,9 @@ int main()
     {
         Core store_core = {0};
         Memory store_memory = {0};
-        store_core.registers[0] = 20;
         store_core.registers[1] = 11;
 
-        Instruction store = {OP_STORE, 0, 1, 0};
+        Instruction store = {OP_STORE, 20, 1, 0};
         execute(&store_core, &store, &store_memory, 1);
         assert(memory_read(&store_memory, 20) == 11 && store_core.current_state == NORMAL);
     }
