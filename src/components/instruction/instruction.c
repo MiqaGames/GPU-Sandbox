@@ -11,16 +11,22 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, size_t 
     core->current_state = NORMAL;
     switch (instruction->opcode){
         case OP_LOAD:
-            if (checker_destination(instruction->a, core) && checker_memory_address(instruction->b, core)){
-                core->registers[instruction->a] = memory_read(memory, instruction->b);
-                stats.loads++;
+            if (checker_destination(instruction->a, core) && checker_address_register(instruction->b, core)){
+                uint32_t address = core->registers[instruction->b];
+                if (checker_memory_address(address, core)){
+                    core->registers[instruction->a] = memory_read(memory, address);
+                    stats.loads++;
+                }
             }
             break;
 
         case OP_STORE:
-            if (checker_memory_address(instruction->a, core) && checker_source_register(instruction->b, core)) {
-                memory_write(memory, instruction->a, core->registers[instruction->b]);
-                stats.stores++;
+            if (checker_address_register(instruction->a, core) && checker_source_register(instruction->b, core)) {
+                uint32_t address = core->registers[instruction->a];
+                if (checker_memory_address(address, core)){
+                    memory_write(memory, address, core->registers[instruction->b]);
+                    stats.stores++;
+                }
             }
             break;
 
