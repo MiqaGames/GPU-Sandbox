@@ -15,7 +15,7 @@ int main()
     assert(core.pc == 0);
     assert(core.current_state == NORMAL);
     assert(core.registers[0] == 0 && core.registers[7] == 0);
-    assert(core.flag == LESS);
+    assert(core.flag == SAME);
 
     return 0;
 }

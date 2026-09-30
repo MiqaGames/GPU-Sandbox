@@ -3,7 +3,7 @@
 
 int main()
 {
-    Memory memory = {0};
+    static Memory memory = {0};
 
     memory_write(&memory, 0, 42);
     memory_write(&memory, MEMORY_SIZE - 1, 99);

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.15)  26 SEP 2026 13:06
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.9.15)  30 SEP 2026 16:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -592,7 +592,7 @@ Underfull \hbox (badness 1721) in paragraph at lines 182--183
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 182--183
-\T2A/cmr/m/n/12 па-м€-ти по ад-ре-су
+\T2A/cmtt/m/n/12 memory[reg[b]] \T2A/cmr/m/n/12 в
  []
 
 
@@ -608,6 +608,11 @@ Underfull \hbox (badness 3601) in paragraph at lines 184--184
 
 Underfull \hbox (badness 10000) in paragraph at lines 184--185
 []|\T2A/cmr/m/n/12 «апись зна-че-ни€
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
+\T2A/cmtt/m/n/12 reg[b] \T2A/cmr/m/n/12 в €чей-ку
  []
 
 
@@ -687,7 +692,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  74i,9n,79p,707b,2121s stack positions out of 10000i,1000n,20000p,200000b,200000s
  <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt1095.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm0600.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\lati1000.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1000.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm0700.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1440.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\latt1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm0800.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1200.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\labx1728.pk> <C:\Users\123\AppData\Local\MiKTeX\fonts/pk/ljfour/lh/lh-t2a/dpi600\larm2074.pk>
-Output written on document.pdf (7 pages, 174399 bytes).
+Output written on document.pdf (7 pages, 174513 bytes).
 PDF statistics:
  617 PDF objects out of 1000 (max. 8388607)
  62 named destinations out of 1000 (max. 500000)
