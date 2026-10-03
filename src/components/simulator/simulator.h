@@ -3,35 +3,47 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #include "components/core/core.h"
 #include "components/instruction/instruction.h"
 #include "components/memory/memory.h"
+#include "components/statistics/statistics.h"
 
 #define MAX_CYCLES 1000000
 
-void run(Core *core, const Instruction *program, size_t program_size, Memory *memory);
+
+
+
+typedef enum{
+    FREE,
+    WORKING,
+    DONE,
+    TASK_ERROR,
+    TASK_TIMEOUT
+} TaskState;
 
 typedef struct {
-    uint32_t cycles;
-    uint32_t instruction_executed;
-    
-    uint32_t loads;
-    uint32_t stores;
-    
-    uint32_t adds;
-    uint32_t subs;
-    uint32_t muls;
-    uint32_t divs;
-    
-    uint32_t jumps;
-    uint32_t conditional_jumps;
-    uint32_t checks;
+    const Instruction *instructions;
+    size_t size;
+} Program;
 
-    uint32_t errors;
-} Statistics;
+typedef struct {
+    TaskState task_state;
+    Core core;          // регистры, pc, флаг, состояние выполнения
+    Statistics stats;   // статистика именно этого ядра
+} CoreContext;
 
-extern Statistics stats;
-extern uint32_t max_cycles;
+typedef struct {
+    Program program;
+    CoreContext *cores;
+    size_t core_count;
+    Memory memory;      // общая память
+    uint64_t cycles;    // такты всей симуляции
+} Simulator;
 
+void run(Simulator *sim);
+void step_core(CoreContext *context, const Program *program, Memory *memory);
+CoreContext *find_free_core(Simulator *sim);
+bool find_working_cores(Simulator *sim);
 #endif
