@@ -28,22 +28,32 @@ typedef struct {
     size_t size;
 } Program;
 
+typedef struct{
+    Program program;
+    uint32_t core_registers[REGISTERS_COUNT];
+    TaskState state;
+    Statistics stats;
+} Task;
+
 typedef struct {
     TaskState task_state;
     Core core;          // регистры, pc, флаг, состояние выполнения
-    Statistics stats;   // статистика именно этого ядра
+    size_t task_index;
 } CoreContext;
 
 typedef struct {
-    Program program;
     CoreContext *cores;
+    Task *tasks;
+    size_t tasks_count;
+    size_t next_task;
     size_t core_count;
     Memory memory;      // общая память
     uint64_t cycles;    // такты всей симуляции
 } Simulator;
 
 void run(Simulator *sim);
-void step_core(CoreContext *context, const Program *program, Memory *memory);
+void step_core(CoreContext *context, const Program *program, Memory *memory, Statistics *stats);
 CoreContext *find_free_core(Simulator *sim);
 bool find_working_cores(Simulator *sim);
+
 #endif
