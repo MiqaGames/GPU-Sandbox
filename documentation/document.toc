@@ -10,8 +10,9 @@
 \contentsline {section}{\numberline {3}Инструкции виртуального процессора}{4}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Параметры инструкций}{4}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Поддерживаемые операции}{5}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Симулятор выполнения}{6}{section.4}%
-\contentsline {section}{\numberline {5}Проверка корректности входных данных}{6}{section.5}%
-\contentsline {section}{\numberline {6}Отладочный вывод}{7}{section.6}%
-\contentsline {section}{\numberline {7}Сброс и инициализация}{7}{section.7}%
-\contentsline {section}{\numberline {8}Тестирование}{7}{section.8}%
+\contentsline {section}{\numberline {4}Симулятор выполнения}{5}{section.4}%
+\contentsline {section}{\numberline {5}Проверка корректности входных данных}{7}{section.5}%
+\contentsline {section}{\numberline {6}Статистика выполнения}{7}{section.6}%
+\contentsline {section}{\numberline {7}Отладочный вывод}{8}{section.7}%
+\contentsline {section}{\numberline {8}Сброс и инициализация}{8}{section.8}%
+\contentsline {section}{\numberline {9}Тестирование}{9}{section.9}%
