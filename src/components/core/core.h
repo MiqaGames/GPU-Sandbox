@@ -16,7 +16,7 @@ typedef enum {
 
 typedef enum {
     SAME,
-    GREATHER,
+    GREATER,
     LESS
 } Flag;
 

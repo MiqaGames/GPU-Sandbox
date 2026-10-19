@@ -12,45 +12,56 @@
 
 
 
-int main(void)
+int main()
 {
-srand(time(NULL));
-printf("---------------------------------- NEW RUN --------------------------------------------\n");
+    const Instruction sum_program[] = {
+        {OP_ADD, 2, 0, 1},
+        {OP_STORE, 6, 2, 0},
+        {OP_HALT, 0, 0, 0}
+    };
+    const Instruction multiply_program[] = {
+        {OP_MUL, 2, 0, 1},
+        {OP_STORE, 6, 2, 0},
+        {OP_HALT, 0, 0, 0}
+    };
+    const Instruction subtract_program[] = {
+        {OP_SUB, 2, 0, 1},
+        {OP_STORE, 6, 2, 0},
+        {OP_HALT, 0, 0, 0}
+    };
 
-Instruction program[MAX_PROGRAM_SIZE];
-size_t program_size = 0, loop_start = 0;
-Core core = {0};
-core.registers[0] = 0; //beg
-core.registers[1] = 1; //step
-core.registers[2] = 1000; //end
-loop_start = program_size;
-program[program_size++] = (Instruction){OP_LOAD, 3, 0, 0};
-program[program_size++] = (Instruction){OP_ADD, 4, 4, 3};
-program[program_size++] = (Instruction){OP_ADD, 0, 0, 1};
-program[program_size++] = (Instruction){OP_CMP, 0, 2, 0};
-program[program_size++] = (Instruction){OP_JIF, (uint32_t)loop_start, LESS, 0};
+    CoreContext cores[2] = {0};
+    Task tasks[] = {
+        {
+            .program = {sum_program, sizeof(sum_program) / sizeof(sum_program[0])},
+            .core_registers = {100, 28, 0, 0, 0, 0, 100},
+            .state = FREE
+        },
+        {
+            .program = {multiply_program, sizeof(multiply_program) / sizeof(multiply_program[0])},
+            .core_registers = {100, 6, 0, 0, 0, 0, 101},
+            .state = FREE
+        },
+        {
+            .program = {subtract_program, sizeof(subtract_program) / sizeof(subtract_program[0])},
+            .core_registers = {100, 48, 0, 0, 0, 0, 102},
+            .state = FREE
+        }
+    };
+    static Simulator sim = {0}; // static т.к. там хрнаится +- 4МБ, так что надо брать память не из стэка
 
+    sim.cores = cores;
+    sim.core_count = sizeof(cores) / sizeof(cores[0]);
+    sim.tasks = tasks;
+    sim.tasks_count = sizeof(tasks) / sizeof(tasks[0]);
 
+    run(&sim);
 
+    print_simulator(&sim);
+    printf("Task outputs in memory:\n");
+    printf("Task 0: %u\n", sim.memory.data[100]);
+    printf("Task 1: %u\n", sim.memory.data[101]);
+    printf("Task 2: %u\n", sim.memory.data[102]);
 
-
-
-program[program_size++] = (Instruction){OP_HALT, 0, 0, 0};
-
-
-
-core.current_state = NORMAL;
-static Memory mem = {0};
-for (int i = 0; i < 1000; i++){
-    mem.data[i] = rand();
-}
-run(&core, program, program_size, &mem);
-print_registers(&core);
-print_state(&core);
-print_program(program, program_size);
-print_statistics(stats);    
-core_reset(&core);
-memory_reset(&mem);
-stats.cycles = 0;
-return 0;
+    return 0;
 }
