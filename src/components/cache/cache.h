@@ -21,9 +21,9 @@ typedef struct {
 } CacheSet;
 
 typedef struct{
-    uint32_t hits;
-    uint32_t misses;
-    uint32_t evictions;
+    uint64_t hits;
+    uint64_t misses;
+    uint64_t evictions;
 } CacheStatistics;
 
 typedef struct{
@@ -31,6 +31,24 @@ typedef struct{
     size_t set_count;
     CacheStatistics stats;
 } Cache;
+
+typedef struct{
+    size_t set_index;
+    uint32_t tag;
+    size_t word_offset;
+}CacheAddress;
+
+typedef enum{
+    CACHE_HIT,
+    CACHE_MISS_FREE_WAY,
+    CACHE_MISS_EVICTION,
+    CACHE_INVALID_INPUT
+}CacheLookupResult;
+
+CacheLookupResult cache_probe(Cache *cache, const CacheAddress *address, size_t *way_index);
+bool cache_address_decode(const Cache *cache, uint32_t address, CacheAddress *decoded);
+bool cache_init(Cache *cache, size_t set_count);
+void cache_reset(Cache *cache);
 
 
 #endif
