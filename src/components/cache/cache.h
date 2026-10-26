@@ -5,6 +5,8 @@
 #define CACHE_WAYS 2
 #define CACHE_MAX_SETS 128
 
+#include "components/memory/memory.h"
+
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
@@ -45,9 +47,12 @@ typedef enum{
     CACHE_INVALID_INPUT
 }CacheLookupResult;
 
+
 CacheLookupResult cache_probe(Cache *cache, const CacheAddress *address, size_t *way_index);
 bool cache_address_decode(const Cache *cache, uint32_t address, CacheAddress *decoded);
+bool cache_read_word(Cache *cache, const Memory *memory, uint32_t address, uint32_t *value);
 bool cache_init(Cache *cache, size_t set_count);
+bool cache_fill(Cache *cache, const Memory *memory, const CacheAddress *address, size_t way_index);
 void cache_reset(Cache *cache);
 
 
