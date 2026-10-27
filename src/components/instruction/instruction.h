@@ -8,6 +8,7 @@
 #include "components/core/core.h"
 #include "components/memory/memory.h"
 #include "components/statistics/statistics.h"
+#include "components/cache/cache.h"
 
 
 typedef enum{
@@ -97,7 +98,7 @@ typedef struct{
     uint32_t c;
 } Instruction;
 
-void execute(Core *core, const Instruction *instruction, Memory *memory, size_t program_size, Statistics *stats);
+void execute(Core *core, const Instruction *instruction, Memory *memory, Cache *cache, Cache *l2_cache, size_t program_size, Statistics *stats);
 bool checker_destination(uint32_t checkvar, Core *core, Statistics *stats);
 bool checker_address_register(uint32_t checkvar, Core *core, Statistics *stats);
 bool checker_memory_address(uint32_t checkvar, Core *core, Statistics *stats);

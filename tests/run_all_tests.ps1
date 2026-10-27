@@ -18,18 +18,23 @@ $jobs = @(
     },
     @{
         Name = "instruction";
-        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_instruction.c"), (Join-Path $root "src/components/core/core.c"), (Join-Path $root "src/components/memory/memory.c"), (Join-Path $root "src/components/instruction/instruction.c"), "-o", (Join-Path $testsDir "test_instruction.exe"));
+        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_instruction.c"), (Join-Path $root "src/components/core/core.c"), (Join-Path $root "src/components/memory/memory.c"), (Join-Path $root "src/components/instruction/instruction.c"), "-o", (Join-Path $testsDir "test_instruction.exe"), (Join-Path $root "src/components/cache/cache.c"));
         Run = (Join-Path $testsDir "test_instruction.exe")
     },
     @{
         Name = "simulator";
-        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_simulator.c"), (Join-Path $root "src/components/core/core.c"), (Join-Path $root "src/components/memory/memory.c"), (Join-Path $root "src/components/instruction/instruction.c"), (Join-Path $root "src/components/simulator/simulator.c"), "-o", (Join-Path $testsDir "test_simulator.exe"));
+        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_simulator.c"), (Join-Path $root "src/components/core/core.c"), (Join-Path $root "src/components/memory/memory.c"), (Join-Path $root "src/components/instruction/instruction.c"), (Join-Path $root "src/components/simulator/simulator.c"), (Join-Path $root "src/components/cache/cache.c"), "-o", (Join-Path $testsDir "test_simulator.exe"));
         Run = (Join-Path $testsDir "test_simulator.exe")
     },
     @{
         Name = "debug";
-        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_debug.c"), (Join-Path $root "src/components/core/core.c"), (Join-Path $root "src/components/memory/memory.c"), (Join-Path $root "src/components/instruction/instruction.c"), (Join-Path $root "src/components/debug/debug.c"), "-o", (Join-Path $testsDir "test_debug.exe"));
+        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_debug.c"), (Join-Path $root "src/components/core/core.c"), (Join-Path $root "src/components/memory/memory.c"), (Join-Path $root "src/components/instruction/instruction.c"), (Join-Path $root "src/components/debug/debug.c"), (Join-Path $root "src/components/cache/cache.c"), "-o", (Join-Path $testsDir "test_debug.exe"));
         Run = (Join-Path $testsDir "test_debug.exe")
+    },
+    @{
+        Name = "cache";
+        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_cache.c"), (Join-Path $root "src/components/cache/cache.c"), "-o", (Join-Path $testsDir "test_cache.exe"));
+        Run = (Join-Path $testsDir "test_cache.exe")
     }
 )
 
