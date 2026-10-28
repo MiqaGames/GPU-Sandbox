@@ -1,16 +1,25 @@
-FROM gcc:13
+FROM alpine:3.22 AS build
 
-WORKDIR /app
+WORKDIR /src
+
+RUN apk add --no-cache build-base
 
 COPY . .
 
-RUN gcc -std=c11 -Wall -Wextra -I src \
+RUN mkdir -p /out && gcc -std=c11 -Wall -Wextra -I src \
     src/main.c \
     src/components/core/core.c \
     src/components/debug/debug.c \
     src/components/instruction/instruction.c \
     src/components/memory/memory.c \
     src/components/simulator/simulator.c \
-    -o app
+    src/components/cache/cache.c \
+    -o /out/app
+
+FROM alpine:3.22
+
+WORKDIR /app
+
+COPY --from=build /out/app ./app
 
 CMD ["./app"]

@@ -1,13 +1,23 @@
-FROM gcc:13
+FROM alpine:3.22 AS build
+
+WORKDIR /src
+
+RUN apk add --no-cache build-base
+
+COPY . .
+
+RUN mkdir -p /out && \
+    gcc -std=c11 -I src tests/test_core.c src/components/core/core.c -o /out/test_core && \
+    gcc -std=c11 -I src tests/test_memory.c src/components/memory/memory.c -o /out/test_memory && \
+    gcc -std=c11 -I src tests/test_instruction.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/cache/cache.c -o /out/test_instruction && \
+    gcc -std=c11 -I src tests/test_simulator.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/simulator/simulator.c src/components/cache/cache.c -o /out/test_simulator && \
+    gcc -std=c11 -I src tests/test_debug.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/debug/debug.c src/components/cache/cache.c -o /out/test_debug && \
+    gcc -std=c11 -I src tests/test_cache.c src/components/cache/cache.c -o /out/test_cache
+
+FROM alpine:3.22
 
 WORKDIR /app
 
-COPY . /app
+COPY --from=build /out/ ./tests/
 
-RUN gcc -std=c11 -I src tests/test_core.c src/components/core/core.c -o tests/test_core.exe && \
-    gcc -std=c11 -I src tests/test_memory.c src/components/memory/memory.c -o tests/test_memory.exe && \
-    gcc -std=c11 -I src tests/test_instruction.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c -o tests/test_instruction.exe && \
-    gcc -std=c11 -I src tests/test_simulator.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/simulator/simulator.c -o tests/test_simulator.exe && \
-    gcc -std=c11 -I src tests/test_debug.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/debug/debug.c -o tests/test_debug.exe
-
-CMD ["sh", "-lc", "./tests/test_core.exe && ./tests/test_memory.exe && ./tests/test_instruction.exe && ./tests/test_simulator.exe && ./tests/test_debug.exe"]
+CMD ["sh", "-c", "./tests/test_core && ./tests/test_memory && ./tests/test_instruction && ./tests/test_simulator && ./tests/test_debug && ./tests/test_cache"]
