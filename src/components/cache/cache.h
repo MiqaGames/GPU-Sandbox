@@ -19,7 +19,7 @@ typedef struct{
 
 typedef struct {
     CacheLine ways[CACHE_WAYS];
-    uint8_t lru_way;  
+    uint8_t lru_way;  // least recently used
 } CacheSet;
 
 typedef struct{
