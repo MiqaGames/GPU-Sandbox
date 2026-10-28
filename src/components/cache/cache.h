@@ -57,6 +57,7 @@ bool cache_write_word(Cache *cache, Memory *memory, uint32_t address, uint32_t v
 bool cache_fill(Cache *cache, const Memory *memory, const CacheAddress *address, size_t way_index);
 bool cache_fill_words(Cache *cache, const CacheAddress *address, size_t way_index, const uint32_t words[CACHE_LINE_WORDS]);
 bool cache_read_word_with_l2(Cache *l1_cache, Cache *l2_cache, const Memory *memory, uint32_t address, uint32_t *value);
+bool cache_write_word_with_l2(Cache *l1_cache, Cache *l2_cache, Memory *memory, uint32_t address, uint32_t value);
 void cache_reset(Cache *cache);
 
 

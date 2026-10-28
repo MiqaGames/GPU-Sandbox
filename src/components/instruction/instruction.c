@@ -11,7 +11,13 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, Cache *
             if (checker_destination(instruction->a, core, stats) && checker_address_register(instruction->b, core, stats)){
                 uint32_t address = core->registers[instruction->b];
                 if (checker_memory_address(address, core, stats)){
-                    if (!cache_read_word(cache, memory, address, &core->registers[instruction->a])){
+                    if (l2_cache != NULL) {
+                        if (!cache_read_word_with_l2(cache, l2_cache, memory, address, &core->registers[instruction->a])){
+                            core->current_state = ERROR;
+                            stats->errors++;
+                            break;
+                        }
+                    } else if (!cache_read_word(cache, memory, address, &core->registers[instruction->a])) {
                         core->current_state = ERROR;
                         stats->errors++;
                         break;
@@ -25,7 +31,13 @@ void execute(Core *core, const Instruction *instruction, Memory *memory, Cache *
             if (checker_address_register(instruction->a, core, stats) && checker_source_register(instruction->b, core, stats)) {
                 uint32_t address = core->registers[instruction->a];
                 if (checker_memory_address(address, core, stats)){
-                    if (!cache_write_word(cache, memory, address, core->registers[instruction->b])){
+                    if (l2_cache != NULL) {
+                        if (!cache_write_word_with_l2(cache, l2_cache, memory, address, core->registers[instruction->b])){
+                            core->current_state = ERROR;
+                            stats->errors++;
+                            break;
+                        }
+                    } else if (!cache_write_word(cache, memory, address, core->registers[instruction->b])) {
                         core->current_state = ERROR;
                         stats->errors++;
                         break;

@@ -163,6 +163,37 @@ bool cache_read_word_with_l2(Cache *l1_cache, Cache *l2_cache, const Memory *mem
     return true;
 }
 
+bool cache_write_word_with_l2(Cache *l1_cache, Cache *l2_cache, Memory *memory, uint32_t address, uint32_t value){
+    if (l1_cache == NULL || l2_cache == NULL || memory == NULL || address >= MEMORY_SIZE) {
+        return false;
+    }
+
+    if (!cache_write_word(l1_cache, memory, address, value)) {
+        return false;
+    }
+
+    CacheAddress l2_addr;
+    if (!cache_address_decode(l2_cache, address, &l2_addr)) {
+        return false;
+    }
+
+    size_t l2_way = 0;
+    CacheLookupResult l2_result = cache_probe(l2_cache, &l2_addr, &l2_way);
+    if (l2_result == CACHE_HIT) {
+        l2_cache->sets[l2_addr.set_index].ways[l2_way].words[l2_addr.word_offset] = value;
+        return true;
+    }
+    if (l2_result != CACHE_MISS_FREE_WAY && l2_result != CACHE_MISS_EVICTION) {
+        return false;
+    }
+
+    if (!cache_fill(l2_cache, memory, &l2_addr, l2_way)) {
+        return false;
+    }
+    l2_cache->sets[l2_addr.set_index].ways[l2_way].words[l2_addr.word_offset] = value;
+    return true;
+}
+
 void cache_reset(Cache *cache){
     if (cache == NULL || cache->set_count > CACHE_MAX_SETS || cache->set_count == 0){
         return;
