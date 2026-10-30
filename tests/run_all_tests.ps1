@@ -35,6 +35,11 @@ $jobs = @(
         Name = "cache";
         Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_cache.c"), (Join-Path $root "src/components/cache/cache.c"), "-o", (Join-Path $testsDir "test_cache.exe"));
         Run = (Join-Path $testsDir "test_cache.exe")
+    },
+    @{
+        Name = "builder";
+        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_builder.c"), (Join-Path $root "src/components/builder/builder.c"), (Join-Path $root "src/components/memory/memory.c"), "-o", (Join-Path $testsDir "test_builder.exe"));
+        Run = (Join-Path $testsDir "test_builder.exe")
     }
 )
 

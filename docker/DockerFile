@@ -14,6 +14,7 @@ RUN mkdir -p /out && gcc -std=c11 -Wall -Wextra -I src \
     src/components/memory/memory.c \
     src/components/simulator/simulator.c \
     src/components/cache/cache.c \
+    src/components/builder/builder.c \
     -o /out/app
 
 FROM alpine:3.22

@@ -19,6 +19,12 @@
 ### test_debug.c
 Проверяет корректность отладочного вывода. Функции печати должны работать без изменения состояния **Core**. `print_simulator()` дополнительно отображает ядра, назначенные задачи и их статистику.
 
+### test_cache.c
+Проверяет работу кэша: загрузку, выгрузку, hit/miss статистику и поведение при конфликтах.
+
+### test_builder.c
+Проверяет создание задач с состоянием по умолчанию и с явно заданным состоянием, настройку регистров, симулятора и загрузку слов в память.
+
 ## Как пользоваться
 
 ### Быстрый запуск всех тестов сразу
@@ -42,6 +48,7 @@
    gcc -std=c11 -I src tests/test_instruction.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c -o tests/test_instruction.exe
    gcc -std=c11 -I src tests/test_simulator.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/simulator/simulator.c -o tests/test_simulator.exe
    gcc -std=c11 -I src tests/test_debug.c src/components/core/core.c src/components/memory/memory.c src/components/instruction/instruction.c src/components/debug/debug.c -o tests/test_debug.exe
+   gcc -std=c11 -I src tests/test_builder.c src/components/builder/builder.c src/components/memory/memory.c -o tests/test_builder.exe
 
 3. Запустите исполняемый файл:
 
@@ -50,6 +57,7 @@
    ./tests/test_instruction.exe
    ./tests/test_simulator.exe
    ./tests/test_debug.exe
+   ./tests/test_builder.exe
 
 4. Если программа завершилась без ошибок — тест прошёл.
 
@@ -69,9 +77,3 @@
 
    docker build -f .\docker\Dockerfile.tests -t school-project-tests .
    docker run --rm school-project-tests
-
-## Общая заметка
-
-Тесты собираются и запускаются отдельными исполняемыми файлами, чтобы сценарии с разными ядрами, задачами и памятью не влияли друг на друга. Scheduler хранит статистику для каждой задачи, а глобальное число тактов — в `Simulator.cycles`.
-
-
