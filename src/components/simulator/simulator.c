@@ -31,6 +31,16 @@ void run(Simulator *sim) {
     }
     sim->next_task = 0;
     sim->cycles = 0;
+    for (size_t i = 0; i < sim->core_count; i++){
+        if (!cache_init(&sim->cores[i].l1_cache, 32)) {
+            printf("Failed to initialize L1 cache for core %u\n", (unsigned int)i);
+            return;
+        }
+    }
+    if (!cache_init(&sim->l2_cache, 128)) {
+        printf("Failed to initialize L2 cache\n");
+        return;
+    }
     
     while ((find_working_cores(sim) || sim->next_task < sim->tasks_count) && sim->cycles < MAX_CYCLES) {
         submin_task(sim);
@@ -55,7 +65,7 @@ void run(Simulator *sim) {
                 context->task_state = FREE;
                 continue;
             }
-            step_core(context, &task->program, &sim->memory, &task->stats);
+            step_core(context, &task->program, &sim->memory, &sim->l2_cache, &task->stats);
             if (context->task_state != WORKING){
                 task->state = context->task_state;
                 context->task_state = FREE;
@@ -79,7 +89,7 @@ void run(Simulator *sim) {
     }
 }
 
-void step_core(CoreContext *context, const Program *program, Memory *memory, Statistics *stats) {
+void step_core(CoreContext *context, const Program *program, Memory *memory, Cache *l2_cache, Statistics *stats) {
     if (context == NULL || context->task_state != WORKING) {
         return;
     }
@@ -99,7 +109,7 @@ void step_core(CoreContext *context, const Program *program, Memory *memory, Sta
         return;
     }
 
-    execute(&context->core, &program->instructions[context->core.pc], memory, program->size, stats);
+    execute(&context->core, &program->instructions[context->core.pc], memory, &context->l1_cache, l2_cache, program->size, stats);
     stats->instruction_executed++;
     stats->cycles++;
 

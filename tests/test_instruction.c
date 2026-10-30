@@ -1,11 +1,14 @@
 #include <assert.h>
 #include "components/instruction/instruction.h"
 #include "components/memory/memory.h"
+#include "components/cache/cache.h"
 
 int main()
 {
     static Memory empty_memory = {0};
     Statistics stats = {0};
+    Cache empty_cache = {0};
+    assert(cache_init(&empty_cache, 32));
 
     {
         Core core = {0};
@@ -35,8 +38,10 @@ int main()
         core.registers[1] = 10;
 
         Instruction load = {OP_LOAD, 0, 1, 0};
-        execute(&core, &load, &memory, 1, &stats);
+        execute(&core, &load, &memory, &empty_cache, NULL, 1, &stats);
         assert(core.registers[0] == 77 && core.current_state == NORMAL);
+        assert(empty_cache.stats.misses == 1);
+        assert(empty_cache.stats.hits == 0);
     }
 
     {
@@ -46,7 +51,7 @@ int main()
         store_core.registers[1] = 11;
 
         Instruction store = {OP_STORE, 0, 1, 0};
-        execute(&store_core, &store, &store_memory, 1, &stats);
+        execute(&store_core, &store, &store_memory, &empty_cache, NULL, 1, &stats);
         assert(memory_read(&store_memory, 20) == 11 && store_core.current_state == NORMAL);
     }
 
@@ -56,7 +61,7 @@ int main()
         core.registers[1] = 20;
 
         Instruction add = {OP_ADD, 2, 0, 1};
-        execute(&core, &add, &empty_memory, 1, &stats);
+        execute(&core, &add, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.registers[2] == 30);
     }
 
@@ -66,7 +71,7 @@ int main()
         core.registers[1] = 20;
 
         Instruction sub = {OP_SUB, 2, 0, 1};
-        execute(&core, &sub, &empty_memory, 1, &stats);
+        execute(&core, &sub, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.registers[2] == 30);
     }
 
@@ -76,7 +81,7 @@ int main()
         core.registers[1] = 20;
 
         Instruction mul = {OP_MUL, 2, 0, 1};
-        execute(&core, &mul, &empty_memory, 1, &stats);
+        execute(&core, &mul, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.registers[2] == 200);
     }
 
@@ -86,7 +91,7 @@ int main()
         core.registers[1] = 20;
 
         Instruction div = {OP_DIV, 2, 0, 1};
-        execute(&core, &div, &empty_memory, 1, &stats);
+        execute(&core, &div, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.registers[2] == 5 && core.current_state == NORMAL);
     }
 
@@ -96,7 +101,7 @@ int main()
         core.registers[1] = 0;
 
         Instruction div_zero = {OP_DIV, 2, 0, 1};
-        execute(&core, &div_zero, &empty_memory, 1, &stats);
+        execute(&core, &div_zero, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.current_state == ERROR);
     }
 
@@ -106,7 +111,7 @@ int main()
         core.registers[1] = 7;
 
         Instruction cmp = {OP_CMP, 0, 1, 0};
-        execute(&core, &cmp, &empty_memory, 1, &stats);
+        execute(&core, &cmp, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.flag == GREATER);
     }
 
@@ -116,7 +121,7 @@ int main()
         core.registers[1] = 10;
 
         Instruction cmp = {OP_CMP, 0, 1, 0};
-        execute(&core, &cmp, &empty_memory, 1, &stats);
+        execute(&core, &cmp, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.flag == LESS);
     }
 
@@ -126,14 +131,14 @@ int main()
         core.registers[1] = 9;
 
         Instruction cmp = {OP_CMP, 0, 1, 0};
-        execute(&core, &cmp, &empty_memory, 1, &stats);
+        execute(&core, &cmp, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.flag == SAME);
     }
 
     {
         Core core = {0};
         Instruction halt = {OP_HALT, 0, 0, 0};
-        execute(&core, &halt, &empty_memory, 1, &stats);
+        execute(&core, &halt, &empty_memory, &empty_cache, NULL, 1, &stats);
         assert(core.current_state == HALT);
     }
 
@@ -143,7 +148,7 @@ int main()
         core.current_state = NORMAL;
 
         Instruction jump = {OP_JUMP, 2, 0, 0};
-        execute(&core, &jump, &memory, 8, &stats);
+        execute(&core, &jump, &memory, &empty_cache, NULL, 8, &stats);
         assert(core.pc == 2 && core.current_state == JUMP);
     }
 
@@ -154,7 +159,7 @@ int main()
         core.flag = GREATER;
 
         Instruction jif = {OP_JIF, 2, GREATER, 0};
-        execute(&core, &jif, &memory, 8, &stats);
+        execute(&core, &jif, &memory, &empty_cache, NULL, 8, &stats);
         assert(core.pc == 2 && core.current_state == JUMP);
     }
 
@@ -165,9 +170,8 @@ int main()
         core.flag = LESS;
 
         Instruction jif = {OP_JIF, 2, GREATER, 0};
-        execute(&core, &jif, &memory, 8, &stats);
+        execute(&core, &jif, &memory, &empty_cache, NULL, 8, &stats);
         assert(core.pc == 0 && core.current_state == NORMAL);
     }
-
     return 0;
 }
