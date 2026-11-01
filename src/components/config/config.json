@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "cache": {
+    "l1": {
+      "sets": 32,
+      "ways": 4,
+      "words_per_line": 8
+    },
+    "l2": {
+      "sets": 128,
+      "ways": 8,
+      "words_per_line": 16
+    }
+  }
+}
