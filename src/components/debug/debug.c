@@ -9,15 +9,21 @@ void print_registers(const Core *core){
     printf("\n");
 }
 void print_cache_state(const Cache *cache){
+    if (cache == NULL || cache->lines == NULL || cache->words == NULL){
+        printf("Cache state: unavailable\n");
+        return;
+    }
     printf("Cache state:\n");
     for (size_t set_index = 0; set_index < cache->set_count; set_index++){
         printf("Set %zu:\n", set_index);
-        for (size_t way_index = 0; way_index < CACHE_WAYS; way_index++){
-            const CacheLine *line = &cache->sets[set_index].ways[way_index];
+        for (size_t way_index = 0; way_index < cache->way_count; way_index++){
+            size_t line_index = set_index * cache->way_count + way_index;
+            const CacheLine *line = &cache->lines[line_index];
+            size_t word_start = line_index * cache->line_words;
             printf("  Way %zu: Valid: %d, Tag: %u, Words: [", way_index, line->valid, line->tag);
-            for (size_t word_index = 0; word_index < CACHE_LINE_WORDS; word_index++){
-                printf("%u", line->words[word_index]);
-                if (word_index < CACHE_LINE_WORDS - 1){
+            for (size_t word_index = 0; word_index < cache->line_words; word_index++){
+                printf("%u", cache->words[word_start + word_index]);
+                if (word_index + 1 < cache->line_words){
                     printf(", ");
                 }
             }

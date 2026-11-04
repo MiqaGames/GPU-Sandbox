@@ -8,7 +8,7 @@ int main()
     static Memory empty_memory = {0};
     Statistics stats = {0};
     Cache empty_cache = {0};
-    assert(cache_init(&empty_cache, 32));
+    assert(cache_init(&empty_cache, 32, 2, 4));
 
     {
         Core core = {0};
@@ -173,5 +173,6 @@ int main()
         execute(&core, &jif, &memory, &empty_cache, NULL, 8, &stats);
         assert(core.pc == 0 && core.current_state == NORMAL);
     }
+    cache_destroy(&empty_cache);
     return 0;
 }

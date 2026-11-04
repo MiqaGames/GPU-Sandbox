@@ -15,6 +15,12 @@
 
 int main()
 {
+    char error[256];
+    SimulatorConfig config;
+    if (!config_load_file("src/components/config/config.json", &config, error, sizeof(error))) {
+        fprintf(stderr, "Failed to load config file: %s\n", error);
+        return 1;
+    }
     static const Instruction dot_product[] = {
         {OP_LOAD, 4, 0, 0},
         {OP_LOAD, 5, 1, 0},
@@ -72,7 +78,7 @@ int main()
     memory_load_words(&dot_sim.memory, 200, vector_b, ARRAY_COUNT(vector_b));
 
     printf("=== Dot product task ===\n");
-    run(&dot_sim);
+    run(&dot_sim, &config);
     print_simulator(&dot_sim);
     print_registers(&dot_cores[0].core);
     print_flag(&dot_cores[0].core);
@@ -101,7 +107,7 @@ int main()
     }
 
     printf("\n=== FIFO and cache pressure tasks ===\n");
-    run(&cache_sim);
+    run(&cache_sim, &config);
     print_simulator(&cache_sim);
     print_memory_state(&cache_sim.memory, 10000, 10002);
     print_cache_stats(&cache_cores[0].l1_cache);
@@ -125,7 +131,7 @@ int main()
 
     printf("\n=== Four-core stress workload ===\n");
     clock_t stress_start = clock();
-    run(&stress_sim);
+    run(&stress_sim, &config);
     double elapsed_seconds = (double)(clock() - stress_start) / CLOCKS_PER_SEC;
 
     print_simulator(&stress_sim);

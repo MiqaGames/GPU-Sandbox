@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdio.h>
 
 #include "components/simulator/simulator.h"
 
@@ -43,8 +44,13 @@ int main(void)
     sim.tasks = tasks;
     sim.tasks_count = sizeof(tasks) / sizeof(tasks[0]);
     memory_reset(&sim.memory);
-
-    run(&sim);
+    char error[256];
+    SimulatorConfig config;
+    if (!config_load_file("src/components/config/config.json", &config, error, sizeof(error))) {
+        fprintf(stderr, "Failed to load config file: %s\n", error);
+        return 1;
+    }
+    run(&sim, &config);
 
     assert(tasks[0].state == DONE);
     assert(tasks[1].state == DONE);
@@ -73,8 +79,8 @@ int main(void)
     sim.tasks = tasks;
     sim.tasks_count = 2;
     memory_reset(&sim.memory);
-
-    run(&sim);
+    
+    run(&sim, &config);
 
     assert(tasks[0].state == TASK_ERROR);
     assert(tasks[1].state == DONE);
@@ -91,7 +97,7 @@ int main(void)
     sim.tasks = tasks;
     sim.tasks_count = 1;
 
-    run(&sim);
+    run(&sim, &config);
 
     assert(tasks[0].state == TASK_TIMEOUT);
     assert(cores[0].core.current_state == TIMEOUT);

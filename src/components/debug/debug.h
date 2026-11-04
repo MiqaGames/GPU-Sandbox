@@ -10,6 +10,7 @@
 #include "components/simulator/simulator.h"
 
 void print_registers(const Core *core);
+void print_cache_state(const Cache *cache);
 void print_cache_stats(const Cache *cache);
 void print_memory_state(const Memory *memory, uint32_t start_address, uint32_t end_address);
 void print_flag(const Core *core);

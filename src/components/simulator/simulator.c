@@ -24,21 +24,21 @@ void submin_task(Simulator *sim){
 }
 
 
-void run(Simulator *sim) {
-    if (sim == NULL || sim->cores == NULL || sim->tasks == NULL || sim->tasks_count == 0 || sim->core_count == 0) {
-        printf("Incorrect simulator or task list\n");
+void run(Simulator *sim, const SimulatorConfig *config) {
+    if (config == NULL || sim == NULL || sim->cores == NULL || sim->tasks == NULL || sim->tasks_count == 0 || sim->core_count == 0) {
+        fprintf(stderr, "Incorrect simulator or task list\n");
         return;
     }
     sim->next_task = 0;
     sim->cycles = 0;
     for (size_t i = 0; i < sim->core_count; i++){
-        if (!cache_init(&sim->cores[i].l1_cache, 32)) {
-            printf("Failed to initialize L1 cache for core %u\n", (unsigned int)i);
+        if (!cache_init(&sim->cores[i].l1_cache, config->l1.sets, config->l1.ways, config->l1.words_per_line)) {
+            fprintf(stderr, "Failed to initialize L1 cache for core %u\n", (unsigned int)i);
             return;
         }
     }
-    if (!cache_init(&sim->l2_cache, 128)) {
-        printf("Failed to initialize L2 cache\n");
+    if (!cache_init(&sim->l2_cache, config->l2.sets, config->l2.ways, config->l2.words_per_line)) {
+        fprintf(stderr, "Failed to initialize L2 cache\n");
         return;
     }
     
@@ -52,7 +52,7 @@ void run(Simulator *sim) {
             
             if (context->task_index >= sim->tasks_count) {
                 context->core.current_state = ERROR;
-                printf("Incorrect task index");
+                fprintf(stderr, "Incorrect task index\n");
                 context->task_state = FREE;
                 continue;
             }

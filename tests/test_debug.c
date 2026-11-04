@@ -16,6 +16,16 @@ int main()
     };
     print_program(program, 2);
 
+    Cache cache = {0};
+    assert(cache_init(&cache, 2, 2, 2));
+    CacheAddress address;
+    const uint32_t words[] = {11, 22};
+    assert(cache_address_decode(&cache, 0, &address));
+    assert(cache_fill_words(&cache, &address, 0, words));
+    print_cache_state(&cache);
+    print_cache_stats(&cache);
+    cache_destroy(&cache);
+
     assert(core.registers[0] == 42);
     assert(core.current_state == HALT);
 

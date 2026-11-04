@@ -1,10 +1,6 @@
 #ifndef CACHE_H
 #define CACHE_H
 
-#define CACHE_LINE_WORDS 4
-#define CACHE_WAYS 2
-#define CACHE_MAX_SETS 128
-
 #include "components/memory/memory.h"
 
 #include <stdbool.h>
@@ -12,15 +8,11 @@
 #include <stdint.h>
 
 typedef struct{
-    uint32_t words[CACHE_LINE_WORDS];
+    uint64_t last_used;
     uint32_t tag;
     bool valid;
 } CacheLine;
 
-typedef struct {
-    CacheLine ways[CACHE_WAYS];
-    uint8_t lru_way;  // least recently used
-} CacheSet;
 
 typedef struct{
     uint64_t hits;
@@ -29,8 +21,12 @@ typedef struct{
 } CacheStatistics;
 
 typedef struct{
-    CacheSet sets[CACHE_MAX_SETS];
+    CacheLine *lines;
+    uint32_t *words;
     size_t set_count;
+    size_t way_count;
+    size_t line_words;
+    uint64_t access_clock;
     CacheStatistics stats;
 } Cache;
 
@@ -48,16 +44,22 @@ typedef enum{
 }CacheLookupResult;
 
 
-CacheLookupResult cache_probe(Cache *cache, const CacheAddress *address, size_t *way_index);
+bool cache_init(Cache *cache, size_t set_count, size_t way_count, size_t line_words);
 bool cache_address_decode(const Cache *cache, uint32_t address, CacheAddress *decoded);
-bool cache_read_word(Cache *cache, const Memory *memory, uint32_t address, uint32_t *value);
-bool cache_init(Cache *cache, size_t set_count);
+
+CacheLookupResult cache_probe(Cache *cache, const CacheAddress *address, size_t *way_index);
 bool cache_invalidate(Cache *cache, uint32_t address);
+
+bool cache_read_word(Cache *cache, const Memory *memory, uint32_t address, uint32_t *value);
 bool cache_write_word(Cache *cache, Memory *memory, uint32_t address, uint32_t value);
+
 bool cache_fill(Cache *cache, const Memory *memory, const CacheAddress *address, size_t way_index);
-bool cache_fill_words(Cache *cache, const CacheAddress *address, size_t way_index, const uint32_t words[CACHE_LINE_WORDS]);
+bool cache_fill_words(Cache *cache, const CacheAddress *address, size_t way_index, const uint32_t *words);
+
 bool cache_read_word_with_l2(Cache *l1_cache, Cache *l2_cache, const Memory *memory, uint32_t address, uint32_t *value);
 bool cache_write_word_with_l2(Cache *l1_cache, Cache *l2_cache, Memory *memory, uint32_t address, uint32_t value);
+
+void cache_destroy(Cache *cache);
 void cache_reset(Cache *cache);
 
 

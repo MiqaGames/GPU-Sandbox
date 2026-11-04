@@ -10,6 +10,7 @@
 #include "components/memory/memory.h"
 #include "components/statistics/statistics.h"
 #include "components/cache/cache.h"
+#include "components/config/config_decoder.h"
 
 #define MAX_CYCLES 1000000
 
@@ -54,7 +55,7 @@ typedef struct {
     uint64_t cycles;    // такты всей симуляции
 } Simulator;
 
-void run(Simulator *sim);
+void run(Simulator *sim, const SimulatorConfig *config);
 void step_core(CoreContext *context, const Program *program, Memory *memory, Cache *l2_cache, Statistics *stats);
 CoreContext *find_free_core(Simulator *sim);
 bool find_working_cores(Simulator *sim);

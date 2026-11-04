@@ -3,10 +3,26 @@
 #include "components/cache/cache.h"
 #include "components/memory/memory.h"
 
+static size_t cache_line_index(const Cache *cache, size_t set_index, size_t way_index)
+{
+    return set_index * cache->way_count + way_index;
+}
+
+static CacheLine *cache_line(Cache *cache, size_t set_index, size_t way_index)
+{
+    return &cache->lines[cache_line_index(cache, set_index, way_index)];
+}
+
+static uint32_t cached_word(const Cache *cache, size_t set_index, size_t way_index, size_t word_index)
+{
+    size_t index = cache_line_index(cache, set_index, way_index) * cache->line_words + word_index;
+    return cache->words[index];
+}
+
 int main(){
     Cache cache = {0};
     CacheAddress decoded;
-    assert(cache_init(&cache, 32));
+    assert(cache_init(&cache, 32, 2, 4));
 
     assert(cache_address_decode(&cache, 100, &decoded));
     assert(decoded.set_index == 25);
@@ -39,17 +55,17 @@ int main(){
 
     assert(cache_probe(&cache, &first, &way) == CACHE_MISS_FREE_WAY);
     assert(way == 0);
-    cache.sets[first.set_index].ways[way].valid = true;
-    cache.sets[first.set_index].ways[way].tag = first.tag;
+    cache_line(&cache, first.set_index, way)->valid = true;
+    cache_line(&cache, first.set_index, way)->tag = first.tag;
 
     assert(cache_probe(&cache, &second, &way) == CACHE_MISS_FREE_WAY);
     assert(way == 1);
-    cache.sets[second.set_index].ways[way].valid = true;
-    cache.sets[second.set_index].ways[way].tag = second.tag;
+    cache_line(&cache, second.set_index, way)->valid = true;
+    cache_line(&cache, second.set_index, way)->tag = second.tag;
 
     assert(cache_probe(&cache, &first, &way) == CACHE_HIT);
     assert(way == 0);
-    assert(cache.sets[first.set_index].lru_way == 1);
+    assert(cache_line(&cache, first.set_index, 0)->last_used > cache_line(&cache, first.set_index, 1)->last_used);
 
     assert(cache_probe(&cache, &third, &way) == CACHE_MISS_EVICTION);
     assert(way == 1);
@@ -73,13 +89,13 @@ int main(){
 
     assert(cache_fill(&cache, &memory, &first, way));
 
-    CacheLine *line = &cache.sets[first.set_index].ways[way];
+    CacheLine *line = cache_line(&cache, first.set_index, way);
     assert(line->valid);
     assert(line->tag == first.tag);
-    assert(line->words[0] == 11);
-    assert(line->words[1] == 22);
-    assert(line->words[2] == 33);
-    assert(line->words[3] == 44);
+    assert(cached_word(&cache, first.set_index, way, 0) == 11);
+    assert(cached_word(&cache, first.set_index, way, 1) == 22);
+    assert(cached_word(&cache, first.set_index, way, 2) == 33);
+    assert(cached_word(&cache, first.set_index, way, 3) == 44);
     assert(cache.stats.evictions == 0);
 
     memory.data[228] = 51;
@@ -105,11 +121,11 @@ int main(){
     assert(cache_fill(&cache, &memory, &third, way));
     assert(cache.stats.evictions == 1);
 
-    line = &cache.sets[third.set_index].ways[way];
+    line = cache_line(&cache, third.set_index, way);
     assert(line->valid);
     assert(line->tag == third.tag);
-    assert(line->words[0] == 61);
-    assert(line->words[3] == 64);
+    assert(cached_word(&cache, third.set_index, way, 0) == 61);
+    assert(cached_word(&cache, third.set_index, way, 3) == 64);
 
 
     memory.data[100] = 11;
@@ -150,14 +166,14 @@ int main(){
     memory.data[102] = 21;
     memory.data[103] = 28;
     assert(cache_fill_words(&cache, &first, 0, (const uint32_t[]){7, 14, 21, 28}));
-    CacheLine *filled = &cache.sets[first.set_index].ways[0];
+    CacheLine *filled = cache_line(&cache, first.set_index, 0);
     assert(filled->valid);
     assert(filled->tag == first.tag);
-    assert(filled->words[0] == 7);
-    assert(filled->words[1] == 14);
-    assert(filled->words[2] == 21);
-    assert(filled->words[3] == 28);
-    assert(cache.sets[first.set_index].lru_way == 1);
+    assert(cached_word(&cache, first.set_index, 0, 0) == 7);
+    assert(cached_word(&cache, first.set_index, 0, 1) == 14);
+    assert(cached_word(&cache, first.set_index, 0, 2) == 21);
+    assert(cached_word(&cache, first.set_index, 0, 3) == 28);
+    assert(cache_line(&cache, first.set_index, 0)->last_used > cache_line(&cache, first.set_index, 1)->last_used);
     assert(cache.stats.evictions == 0);
 
     cache_reset(&cache);
@@ -168,8 +184,8 @@ int main(){
     cache_reset(&cache);
     Cache l2_cache = {0};
     CacheAddress l2_addr;
-    uint32_t l2_words[CACHE_LINE_WORDS] = {11, 22, 33, 44};
-    assert(cache_init(&l2_cache, 64));
+    uint32_t l2_words[4] = {11, 22, 33, 44};
+    assert(cache_init(&l2_cache, 64, 2, 4));
     assert(cache_address_decode(&l2_cache, 100, &l2_addr));
     assert(cache_fill_words(&l2_cache, &l2_addr, 0, l2_words));
 
@@ -178,7 +194,9 @@ int main(){
     assert(l1_value == 11);
     assert(cache.stats.misses == 1);
     assert(cache.stats.hits == 0);
-    assert(l2_cache.stats.hits == 1);
+    assert(l2_cache.stats.hits == 4);
 
+    cache_destroy(&cache);
+    cache_destroy(&l2_cache);
     return 0;
 }
