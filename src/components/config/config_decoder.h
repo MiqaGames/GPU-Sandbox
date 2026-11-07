@@ -3,6 +3,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
+#include <stdint.h>
 
 
 typedef struct{
@@ -14,6 +15,9 @@ typedef struct{
 typedef struct{
     CacheConfig l1;
     CacheConfig l2;
+    size_t memory_size;
+    size_t max_program_size;
+    uint64_t max_cycles;
 } SimulatorConfig;
 
 bool config_load_file(const char *path, SimulatorConfig *config, char *error, size_t error_size);

@@ -89,6 +89,19 @@ typedef struct {
 
 ---
 
+### `bool get_memory_size(const cJSON *parent, size_t *memory_size, char *error, size_t error_size)`
+
+Эта функция извлекает размер памяти из JSON-объекта.
+
+#### Что она делает
+1. Проверяет, что `parent` и `memory_size` не равны `NULL`.
+2. Находит объект `memory` в JSON.
+3. Проверяет, что объект `memory` существует и является объектом JSON.
+4. Извлекает поле `size` и проверяет, что оно существует, является числом и больше нуля.
+5. Преобразует значение в `size_t` и сохраняет в `*memory_size`.
+
+---
+
 ## Внутренние служебные функции
 
 ### `static bool read_cache_config(const cJSON *parent, const char *name, CacheConfig *config)`

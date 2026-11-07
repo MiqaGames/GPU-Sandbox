@@ -14,7 +14,7 @@ bool config_load_file(const char *path, SimulatorConfig *config, char *error, si
         return false;
     }
     if (path == NULL || config == NULL) {
-        snprintf(error, error_size, "Invalid arguments to config_load_file");
+        snprintf(error, error_size, "Invalid arguments to config_load_file"); // он заполняет временный буфер error сообщением об ошибке для передачи обратно вызывающей функции. snprintf используется для безопасного форматирования строки с ограничением размера буфера, чтобы избежать переполнения буфера.
         return false;
     }
 
@@ -42,7 +42,7 @@ bool config_load_file(const char *path, SimulatorConfig *config, char *error, si
         return false;
     }
 
-    char *json_text = malloc((size_t)file_size + 1);
+    char *json_text = malloc((size_t)file_size + 1); // +1 - под нулевой символ строки '\0', чтобы гарантировать, что строка будет корректно завершена. Это важно для функций, которые ожидают строки C, так как они используют нулевой символ для определения конца строки.
     if (json_text == NULL) {
         fclose(file);
         snprintf(error, error_size, "Memory allocation failed for JSON text");
@@ -56,7 +56,7 @@ bool config_load_file(const char *path, SimulatorConfig *config, char *error, si
         snprintf(error, error_size, "Failed to read configuration file: %s", path);
         return false;
     }
-    json_text[file_size] = '\0';
+    json_text[file_size] = '\0'; // Завершаем строку нулевым символом
     fclose(file);
 
     bool result = config_parse_json(json_text, config, error, error_size);
@@ -73,7 +73,13 @@ bool config_parse_json(const char *json_text, SimulatorConfig *config, char *err
         return false;
     }
 
-    cJSON *root = cJSON_Parse(json_text);
+    cJSON *root = cJSON_Parse(json_text); // Строит дерево JSON из текста для дальнейшего анализа
+    /*
+    Пример:
+    root
+    └── memory
+        └── size: 262144
+    */
     if (root == NULL) {
         snprintf(error, error_size, "Failed to parse JSON");
         return false;
@@ -81,15 +87,51 @@ bool config_parse_json(const char *json_text, SimulatorConfig *config, char *err
 
     const cJSON *version = cJSON_GetObjectItemCaseSensitive(root, "version");
     const cJSON *cache = cJSON_GetObjectItemCaseSensitive(root, "cache");
+    const cJSON *memory = cJSON_GetObjectItemCaseSensitive(root, "memory");
+    const cJSON *memory_size = cJSON_GetObjectItemCaseSensitive(memory, "size");
+    const cJSON *program = cJSON_GetObjectItemCaseSensitive(root, "program");
+    const cJSON *max_program_size = cJSON_GetObjectItemCaseSensitive(program, "max_program_size");
+    const cJSON *simulation = cJSON_GetObjectItemCaseSensitive(root, "simulation");
+    const cJSON *max_cycles = cJSON_GetObjectItemCaseSensitive(simulation, "max_cycles");
     SimulatorConfig parsed = {0};
     bool valid_version = cJSON_IsNumber(version) && version->valuedouble == 1.0;
     bool l1_result = read_cache_config(cache, "l1", &parsed.l1);
     bool l2_result = read_cache_config(cache, "l2", &parsed.l2);
+    bool valid_memory_size = cJSON_IsNumber(memory_size) &&
+        memory_size->valuedouble >= 1.0 && memory_size->valuedouble <= UINT32_MAX;
+    if (valid_memory_size) {
+        parsed.memory_size = (size_t)memory_size->valuedouble; // valuedouble - это double, поэтому мы проверяем, что значение в пределах допустимого диапазона для size_t, а double оно потому что cJSON использует double для представления чисел в JSON. После проверки мы безопасно приводим его к size_t.
+        valid_memory_size = (double)parsed.memory_size == memory_size->valuedouble;
+    }
+    bool valid_max_program_size = cJSON_IsNumber(max_program_size) &&
+        max_program_size->valuedouble >= 1.0 && max_program_size->valuedouble <= UINT32_MAX;
+    if (valid_max_program_size) {
+        parsed.max_program_size = (size_t)max_program_size->valuedouble;
+        valid_max_program_size = (double)parsed.max_program_size == max_program_size->valuedouble;
+    }
+    bool valid_max_cycles = cJSON_IsNumber(max_cycles) &&
+        max_cycles->valuedouble >= 1.0 && max_cycles->valuedouble <= 9007199254740991.0;
+    if (valid_max_cycles) {
+        parsed.max_cycles = (uint64_t)max_cycles->valuedouble;
+        valid_max_cycles = (double)parsed.max_cycles == max_cycles->valuedouble;
+    }
 
     cJSON_Delete(root);
 
     if (!valid_version) {
         snprintf(error, error_size, "Unsupported or missing configuration version");
+        return false;
+    }
+    if (!valid_memory_size) {
+        snprintf(error, error_size, "Invalid or missing memory size in configuration");
+        return false;
+    }
+    if (!valid_max_program_size) {
+        snprintf(error, error_size, "Invalid or missing maximum program size in configuration");
+        return false;
+    }
+    if (!valid_max_cycles) {
+        snprintf(error, error_size, "Invalid or missing maximum cycle count in configuration");
         return false;
     }
     if (!l1_result || !l2_result) {
@@ -125,19 +167,14 @@ static bool read_cache_config(const cJSON *parent, const char *name, CacheConfig
     const cJSON *ways = cJSON_GetObjectItemCaseSensitive(cache_json, "ways");
     const cJSON *words_per_line = cJSON_GetObjectItemCaseSensitive(cache_json, "words_per_line");
 
-    if (!cJSON_IsNumber(sets) || !cJSON_IsNumber(ways) || !cJSON_IsNumber(words_per_line) ||
-        sets->valuedouble < 1.0 || ways->valuedouble < 1.0 || words_per_line->valuedouble < 1.0 ||
-        sets->valuedouble >= (double)SIZE_MAX || ways->valuedouble >= (double)SIZE_MAX ||
-        words_per_line->valuedouble >= (double)SIZE_MAX) {
+    if (!cJSON_IsNumber(sets) || !cJSON_IsNumber(ways) || !cJSON_IsNumber(words_per_line) || sets->valuedouble < 1.0 || ways->valuedouble < 1.0 || words_per_line->valuedouble < 1.0 || sets->valuedouble >= (double)SIZE_MAX || ways->valuedouble >= (double)SIZE_MAX || words_per_line->valuedouble >= (double)SIZE_MAX) {
         return false;
     }
 
     size_t parsed_sets = (size_t)sets->valuedouble;
     size_t parsed_ways = (size_t)ways->valuedouble;
     size_t parsed_words_per_line = (size_t)words_per_line->valuedouble;
-    if ((double)parsed_sets != sets->valuedouble ||
-        (double)parsed_ways != ways->valuedouble ||
-        (double)parsed_words_per_line != words_per_line->valuedouble) {
+    if ((double)parsed_sets != sets->valuedouble || (double)parsed_ways != ways->valuedouble || (double)parsed_words_per_line != words_per_line->valuedouble) {
         return false;
     }
 

@@ -11,5 +11,14 @@
       "ways": 8,
       "words_per_line": 16
     }
+  },
+  "memory": {
+    "size": 262144
+  },
+  "program":{
+    "max_program_size": 256
+  },
+  "simulation": {
+    "max_cycles": 1000000
   }
 }
