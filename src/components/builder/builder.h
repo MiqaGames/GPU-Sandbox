@@ -6,6 +6,7 @@
 #include "components/instruction/instruction.h"
 #include "components/memory/memory.h"
 #include "components/simulator/simulator.h"
+#include "components/config/config_decoder.h"
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
@@ -22,6 +23,6 @@ Task task_create_with_state(const Instruction *instructions, size_t instruction_
 
 void task_set_register(Task *task, size_t register_index, uint32_t value);
 void simulator_configure(Simulator *simulator, CoreContext *cores, size_t core_count, Task *tasks, size_t task_count);
-void memory_load_words(Memory *memory, uint32_t start_address, const uint32_t *values, size_t count);
+bool memory_load_words(Memory *memory, uint32_t start_address, const uint32_t *values, size_t count);
 
 #endif

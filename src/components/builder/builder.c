@@ -30,8 +30,13 @@ void simulator_configure(Simulator *simulator, CoreContext *cores, size_t core_c
     simulator->tasks_count = task_count;
 }
 
-void memory_load_words(Memory *memory, uint32_t start_address, const uint32_t *values, size_t count){
+bool memory_load_words(Memory *memory, uint32_t start_address, const uint32_t *values, size_t count){
+    if (memory == NULL || memory->data == NULL || values == NULL ||
+        (size_t)start_address > memory->size || count > memory->size - (size_t)start_address) {
+        return false;
+    }
     for (size_t i = 0; i < count; i++){
         memory_write(memory, start_address + (uint32_t)i, values[i]);
     }
+    return true;
 }
