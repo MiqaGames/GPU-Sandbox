@@ -2,3 +2,4 @@
 *.exe
 *.txt
 *.o
+!src/Front/СMakeList.txt

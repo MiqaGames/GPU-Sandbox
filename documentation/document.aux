@@ -12,31 +12,45 @@
 \newlabel{sec:architecture}{{2}{2}{Архитектура проекта}{section.2}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Ключевые компоненты архитектуры}}{2}{table.1}\protected@file@percent }
 \newlabel{tab:components}{{1}{2}{Ключевые компоненты архитектуры}{table.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Память}{2}{subsection.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Память}{3}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Кэш-память}{3}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Ядро процессора}{3}{subsection.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Регистры}{4}{subsubsection.2.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Программный счётчик}{4}{subsubsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Флаги состояния}{4}{subsubsection.2.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.4}Состояния ядра}{4}{subsubsection.2.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Инструкции виртуального процессора}{4}{section.3}\protected@file@percent }
-\newlabel{sec:instructions}{{3}{4}{Инструкции виртуального процессора}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Параметры инструкций}{5}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Поддерживаемые операции}{6}{subsection.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Набор инструкций}}{6}{table.2}\protected@file@percent }
-\newlabel{tab:instructions}{{2}{6}{Набор инструкций}{table.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Симулятор выполнения}{6}{section.4}\protected@file@percent }
-\newlabel{sec:simulator}{{4}{6}{Симулятор выполнения}{section.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Проверка корректности входных данных}{8}{section.5}\protected@file@percent }
-\newlabel{sec:validation}{{5}{8}{Проверка корректности входных данных}{section.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Статистика выполнения}{8}{section.6}\protected@file@percent }
-\newlabel{sec:statistics}{{6}{8}{Статистика выполнения}{section.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Счётчики структуры \texttt  {Statistics}}}{9}{table.3}\protected@file@percent }
-\newlabel{tab:statistics}{{3}{9}{Счётчики структуры \texttt {Statistics}}{table.3}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Отладочный вывод}{9}{section.7}\protected@file@percent }
-\newlabel{sec:debug}{{7}{9}{Отладочный вывод}{section.7}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Сброс и инициализация}{9}{section.8}\protected@file@percent }
-\newlabel{sec:reset}{{8}{9}{Сброс и инициализация}{section.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {9}Тестирование}{10}{section.9}\protected@file@percent }
-\newlabel{sec:testing}{{9}{10}{Тестирование}{section.9}{}}
-\gdef \@abspage@last{10}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Пример организации кэшей при выбранных параметрах}}{3}{table.2}\protected@file@percent }
+\newlabel{tab:cache-config}{{2}{3}{Пример организации кэшей при выбранных параметрах}{table.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Разбиение адреса и размещение данных}{4}{subsubsection.2.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Поля и счётчики кэша}{5}{subsubsection.2.2.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Основные поля структур кэша}}{5}{table.3}\protected@file@percent }
+\newlabel{tab:cache-fields}{{3}{5}{Основные поля структур кэша}{table.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.3}Поиск строки и политика вытеснения}{5}{subsubsection.2.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.4}Алгоритм чтения}{6}{subsubsection.2.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.5}Алгоритм записи}{6}{subsubsection.2.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.6}Ограничения и сброс}{6}{subsubsection.2.2.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Ядро процессора}{7}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.1}Регистры}{7}{subsubsection.2.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.2}Программный счётчик}{7}{subsubsection.2.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.3}Флаги состояния}{7}{subsubsection.2.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.3.4}Состояния ядра}{7}{subsubsection.2.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Конфигурация и подготовка задач}{8}{subsection.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Инструкции виртуального процессора}{8}{section.3}\protected@file@percent }
+\newlabel{sec:instructions}{{3}{8}{Инструкции виртуального процессора}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Параметры инструкций}{9}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Поддерживаемые операции}{10}{subsection.3.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Набор инструкций}}{10}{table.4}\protected@file@percent }
+\newlabel{tab:instructions}{{4}{10}{Набор инструкций}{table.4}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Симулятор выполнения}{10}{section.4}\protected@file@percent }
+\newlabel{sec:simulator}{{4}{10}{Симулятор выполнения}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Переменные и циклы выполнения}{12}{subsection.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Переменные управления симуляцией и учёта времени}}{12}{table.5}\protected@file@percent }
+\newlabel{tab:simulation-counters}{{5}{12}{Переменные управления симуляцией и учёта времени}{table.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Проверка корректности входных данных}{13}{section.5}\protected@file@percent }
+\newlabel{sec:validation}{{5}{13}{Проверка корректности входных данных}{section.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Статистика выполнения}{13}{section.6}\protected@file@percent }
+\newlabel{sec:statistics}{{6}{13}{Статистика выполнения}{section.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Счётчики структуры \texttt  {Statistics}}}{14}{table.6}\protected@file@percent }
+\newlabel{tab:statistics}{{6}{14}{Счётчики структуры \texttt {Statistics}}{table.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Отладочный вывод}{14}{section.7}\protected@file@percent }
+\newlabel{sec:debug}{{7}{14}{Отладочный вывод}{section.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Сброс и инициализация}{14}{section.8}\protected@file@percent }
+\newlabel{sec:reset}{{8}{14}{Сброс и инициализация}{section.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {9}Тестирование}{15}{section.9}\protected@file@percent }
+\newlabel{sec:testing}{{9}{15}{Тестирование}{section.9}{}}
+\gdef \@abspage@last{15}

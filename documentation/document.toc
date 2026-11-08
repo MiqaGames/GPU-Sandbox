@@ -1,19 +1,27 @@
 \babel@toc {russian}{}\relax 
 \contentsline {section}{\numberline {1}Назначение программы}{2}{section.1}%
 \contentsline {section}{\numberline {2}Архитектура проекта}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Память}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.1}Память}{3}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Кэш-память}{3}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Ядро процессора}{3}{subsection.2.3}%
-\contentsline {subsubsection}{\numberline {2.3.1}Регистры}{4}{subsubsection.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.3.2}Программный счётчик}{4}{subsubsection.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.3.3}Флаги состояния}{4}{subsubsection.2.3.3}%
-\contentsline {subsubsection}{\numberline {2.3.4}Состояния ядра}{4}{subsubsection.2.3.4}%
-\contentsline {section}{\numberline {3}Инструкции виртуального процессора}{4}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Параметры инструкций}{5}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Поддерживаемые операции}{6}{subsection.3.2}%
-\contentsline {section}{\numberline {4}Симулятор выполнения}{6}{section.4}%
-\contentsline {section}{\numberline {5}Проверка корректности входных данных}{8}{section.5}%
-\contentsline {section}{\numberline {6}Статистика выполнения}{8}{section.6}%
-\contentsline {section}{\numberline {7}Отладочный вывод}{9}{section.7}%
-\contentsline {section}{\numberline {8}Сброс и инициализация}{9}{section.8}%
-\contentsline {section}{\numberline {9}Тестирование}{10}{section.9}%
+\contentsline {subsubsection}{\numberline {2.2.1}Разбиение адреса и размещение данных}{4}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Поля и счётчики кэша}{5}{subsubsection.2.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.3}Поиск строки и политика вытеснения}{5}{subsubsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.4}Алгоритм чтения}{6}{subsubsection.2.2.4}%
+\contentsline {subsubsection}{\numberline {2.2.5}Алгоритм записи}{6}{subsubsection.2.2.5}%
+\contentsline {subsubsection}{\numberline {2.2.6}Ограничения и сброс}{6}{subsubsection.2.2.6}%
+\contentsline {subsection}{\numberline {2.3}Ядро процессора}{7}{subsection.2.3}%
+\contentsline {subsubsection}{\numberline {2.3.1}Регистры}{7}{subsubsection.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.3.2}Программный счётчик}{7}{subsubsection.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.3.3}Флаги состояния}{7}{subsubsection.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.3.4}Состояния ядра}{7}{subsubsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.4}Конфигурация и подготовка задач}{8}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Инструкции виртуального процессора}{8}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Параметры инструкций}{9}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Поддерживаемые операции}{10}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Симулятор выполнения}{10}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Переменные и циклы выполнения}{12}{subsection.4.1}%
+\contentsline {section}{\numberline {5}Проверка корректности входных данных}{13}{section.5}%
+\contentsline {section}{\numberline {6}Статистика выполнения}{13}{section.6}%
+\contentsline {section}{\numberline {7}Отладочный вывод}{14}{section.7}%
+\contentsline {section}{\numberline {8}Сброс и инициализация}{14}{section.8}%
+\contentsline {section}{\numberline {9}Тестирование}{15}{section.9}%
