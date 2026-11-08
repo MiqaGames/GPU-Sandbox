@@ -12,11 +12,6 @@
 #include "components/cache/cache.h"
 #include "components/config/config_decoder.h"
 
-#define MAX_CYCLES 1000000
-
-
-
-
 typedef enum{
     FREE,
     WORKING,

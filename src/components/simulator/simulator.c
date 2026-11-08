@@ -25,12 +25,22 @@ void submin_task(Simulator *sim){
 
 
 void run(Simulator *sim, const SimulatorConfig *config) {
-    if (config == NULL || sim == NULL || sim->cores == NULL || sim->tasks == NULL || sim->tasks_count == 0 || sim->core_count == 0) {
+    if (config == NULL || sim == NULL || sim->cores == NULL || sim->tasks == NULL || sim->tasks_count == 0 || sim->core_count == 0 || config->memory_size == 0 || config->max_program_size == 0 || config->max_cycles == 0) {
         fprintf(stderr, "Incorrect simulator or task list\n");
         return;
     }
+    for (size_t i = 0; i < sim->tasks_count; i++) {
+        if (sim->tasks[i].program.size > config->max_program_size) {
+            fprintf(stderr, "Task %u exceeds configured maximum program size\n", (unsigned int)i);
+            return;
+        }
+    }
     sim->next_task = 0;
     sim->cycles = 0;
+    if (!memory_init(&sim->memory, config->memory_size)) {
+        fprintf(stderr, "Failed to initialize memory\n");
+        return;
+    }
     for (size_t i = 0; i < sim->core_count; i++){
         if (!cache_init(&sim->cores[i].l1_cache, config->l1.sets, config->l1.ways, config->l1.words_per_line)) {
             fprintf(stderr, "Failed to initialize L1 cache for core %u\n", (unsigned int)i);
@@ -42,7 +52,7 @@ void run(Simulator *sim, const SimulatorConfig *config) {
         return;
     }
     
-    while ((find_working_cores(sim) || sim->next_task < sim->tasks_count) && sim->cycles < MAX_CYCLES) {
+    while ((find_working_cores(sim) || sim->next_task < sim->tasks_count) && sim->cycles < config->max_cycles) {
         submin_task(sim);
         for (size_t i = 0; i < sim->core_count; i++) {
             CoreContext *context = &sim->cores[i];
@@ -75,7 +85,7 @@ void run(Simulator *sim, const SimulatorConfig *config) {
     }
 
 
-    if (sim->cycles >= MAX_CYCLES) {
+    if (sim->cycles >= config->max_cycles) {
         for (size_t i = 0; i < sim->core_count; i++) {
             CoreContext *context = &sim->cores[i];
             if (context->task_state == WORKING) {

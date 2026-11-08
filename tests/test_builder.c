@@ -40,10 +40,13 @@ int main(void)
     assert(simulator.tasks_count == ARRAY_COUNT(tasks));
 
     const uint32_t values[] = {7, 14, 21};
-    memory_load_words(&memory, 40, values, ARRAY_COUNT(values));
+    assert(memory_init(&memory, 64));
+    assert(memory_load_words(&memory, 40, values, ARRAY_COUNT(values)));
     assert(memory_read(&memory, 40) == 7);
     assert(memory_read(&memory, 41) == 14);
     assert(memory_read(&memory, 42) == 21);
+    assert(!memory_load_words(&memory, 62, values, ARRAY_COUNT(values)));
+    memory_destroy(&memory);
 
     return 0;
 }

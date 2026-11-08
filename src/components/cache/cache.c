@@ -42,7 +42,7 @@ void cache_destroy(Cache *cache){
 }
 
 bool cache_address_decode(const Cache *cache, uint32_t address, CacheAddress *decoded){
-    if (cache == NULL || decoded == NULL || cache->set_count == 0 || cache->line_words == 0 || address >= MEMORY_SIZE) return false;
+    if (cache == NULL || decoded == NULL || cache->set_count == 0 || cache->line_words == 0) return false;
 
     uint32_t block_number = address/cache->line_words;
     decoded->set_index = block_number % cache->set_count;
@@ -51,7 +51,7 @@ bool cache_address_decode(const Cache *cache, uint32_t address, CacheAddress *de
     return true;
 }
 bool cache_read_word(Cache *cache, const Memory *memory, uint32_t address, uint32_t *value){
-    if (cache == NULL || memory == NULL || value == NULL || cache->set_count == 0 || cache->line_words == 0 || cache->way_count < 2 || address >= MEMORY_SIZE) return false;
+    if (cache == NULL || memory == NULL || memory->data == NULL || value == NULL || cache->set_count == 0 || cache->line_words == 0 || cache->way_count < 2 || (size_t)address >= memory->size) return false;
     CacheAddress decoded;
     if (!cache_address_decode(cache, address, &decoded)) return false;
     size_t way_index;
@@ -78,7 +78,7 @@ bool cache_read_word(Cache *cache, const Memory *memory, uint32_t address, uint3
 }
 
 bool cache_write_word(Cache *cache, Memory *memory, uint32_t address, uint32_t value){
-    if (cache == NULL || memory == NULL || cache->set_count == 0 || cache->line_words == 0 || cache->way_count < 2 || address >= MEMORY_SIZE) return false;
+    if (cache == NULL || memory == NULL || memory->data == NULL || cache->set_count == 0 || cache->line_words == 0 || cache->way_count < 2 || (size_t)address >= memory->size) return false;
     CacheAddress decoded;
     if (!cache_address_decode(cache, address, &decoded)) return false;
     size_t way_index;
@@ -105,10 +105,10 @@ bool cache_write_word(Cache *cache, Memory *memory, uint32_t address, uint32_t v
 }
 
 bool cache_fill(Cache *cache, const Memory *memory, const CacheAddress *address, size_t way_index){
-    if (cache == NULL || memory == NULL || address == NULL || way_index >= cache->way_count || cache->set_count == 0 || cache->line_words == 0 || address->set_index >= cache->set_count || address->word_offset >= cache->line_words) return false;
+    if (cache == NULL || memory == NULL || memory->data == NULL || address == NULL || way_index >= cache->way_count || cache->set_count == 0 || cache->line_words == 0 || address->set_index >= cache->set_count || address->word_offset >= cache->line_words) return false;
     uint64_t block_number = (uint64_t)address->tag * cache->set_count + address->set_index;
     uint64_t block_start = block_number * cache->line_words;
-    if (block_start >= MEMORY_SIZE || cache->line_words > MEMORY_SIZE - block_start) return false;
+    if (block_start >= memory->size || cache->line_words > memory->size - (size_t)block_start) return false;
     uint32_t *words = malloc(cache->line_words * sizeof(uint32_t));
     if (words == NULL) return false;
     for (size_t i = 0; i < cache->line_words; i++){
@@ -120,7 +120,7 @@ bool cache_fill(Cache *cache, const Memory *memory, const CacheAddress *address,
 }
 
 bool cache_invalidate(Cache *cache, uint32_t address){
-    if (cache == NULL || cache->set_count == 0 || address >= MEMORY_SIZE || cache->lines == NULL || cache->way_count == 0) return false;
+    if (cache == NULL || cache->set_count == 0 || cache->lines == NULL || cache->way_count < 2) return false;
     CacheAddress decoded;
     if (!cache_address_decode(cache, address, &decoded)) return false;
     for (size_t i = 0; i < cache->way_count; i++){
@@ -149,7 +149,7 @@ bool cache_fill_words(Cache *cache, const CacheAddress *address, size_t way_inde
 }
 
 bool cache_read_word_with_l2(Cache *l1_cache, Cache *l2_cache, const Memory *memory, uint32_t address, uint32_t *value){
-    if (l1_cache == NULL || l2_cache == NULL || memory == NULL || value == NULL || address >= MEMORY_SIZE) {
+    if (l1_cache == NULL || l2_cache == NULL || memory == NULL || memory->data == NULL || value == NULL || (size_t)address >= memory->size) {
         return false;
     }
 
@@ -194,7 +194,7 @@ bool cache_read_word_with_l2(Cache *l1_cache, Cache *l2_cache, const Memory *mem
 }
 
 bool cache_write_word_with_l2(Cache *l1_cache, Cache *l2_cache, Memory *memory, uint32_t address, uint32_t value){
-    if (l1_cache == NULL || l2_cache == NULL || memory == NULL || address >= MEMORY_SIZE) {
+    if (l1_cache == NULL || l2_cache == NULL || memory == NULL || memory->data == NULL || (size_t)address >= memory->size) {
         return false;
     }
 

@@ -71,11 +71,18 @@ int main()
     task_set_register(&dot_tasks[0], 6, 4);
     task_set_register(&dot_tasks[0], 7, 1);
     simulator_configure(&dot_sim, dot_cores, ARRAY_COUNT(dot_cores), dot_tasks, ARRAY_COUNT(dot_tasks));
+    if (!memory_init(&dot_sim.memory, config.memory_size)) {
+        fprintf(stderr, "Failed to initialize dot-product memory\n");
+        return 1;
+    }
 
     const uint32_t vector_a[] = {1, 2, 3, 4};
     const uint32_t vector_b[] = {5, 6, 7, 8};
-    memory_load_words(&dot_sim.memory, 100, vector_a, ARRAY_COUNT(vector_a));
-    memory_load_words(&dot_sim.memory, 200, vector_b, ARRAY_COUNT(vector_b));
+    if (!memory_load_words(&dot_sim.memory, 100, vector_a, ARRAY_COUNT(vector_a)) ||
+        !memory_load_words(&dot_sim.memory, 200, vector_b, ARRAY_COUNT(vector_b))) {
+        fprintf(stderr, "Failed to load dot-product inputs\n");
+        return 1;
+    }
 
     printf("=== Dot product task ===\n");
     run(&dot_sim, &config);
@@ -92,11 +99,18 @@ int main()
     static Simulator cache_sim;
 
     simulator_configure(&cache_sim, cache_cores, ARRAY_COUNT(cache_cores), cache_tasks, ARRAY_COUNT(cache_tasks));
+    if (!memory_init(&cache_sim.memory, config.memory_size)) {
+        fprintf(stderr, "Failed to initialize cache-test memory\n");
+        return 1;
+    }
 
     const uint32_t cache_inputs[] = {11, 22, 33};
-    memory_load_words(&cache_sim.memory, 0, cache_inputs, 1);
-    memory_load_words(&cache_sim.memory, 128, cache_inputs + 1, 1);
-    memory_load_words(&cache_sim.memory, 256, cache_inputs + 2, 1);
+    if (!memory_load_words(&cache_sim.memory, 0, cache_inputs, 1) ||
+        !memory_load_words(&cache_sim.memory, 128, cache_inputs + 1, 1) ||
+        !memory_load_words(&cache_sim.memory, 256, cache_inputs + 2, 1)) {
+        fprintf(stderr, "Failed to load cache-test inputs\n");
+        return 1;
+    }
 
     for (size_t i = 0; i < ARRAY_COUNT(cache_tasks); i++) {
         cache_tasks[i] = task_create(cache_pressure, ARRAY_COUNT(cache_pressure));
@@ -120,6 +134,10 @@ int main()
 
     simulator_configure(&stress_sim, stress_cores, ARRAY_COUNT(stress_cores),
                         stress_tasks, ARRAY_COUNT(stress_tasks));
+    if (!memory_init(&stress_sim.memory, config.memory_size)) {
+        fprintf(stderr, "Failed to initialize stress-test memory\n");
+        return 1;
+    }
 
     for (size_t i = 0; i < ARRAY_COUNT(stress_tasks); i++) {
         uint32_t base_address = 10000 + (uint32_t)i * STRESS_MEMORY_STRIDE;

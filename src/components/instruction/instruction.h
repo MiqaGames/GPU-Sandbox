@@ -1,6 +1,5 @@
 #ifndef INSTRUCTION_H
 #define INSTRUCTION_H
-#define MAX_PROGRAM_SIZE 256
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
@@ -27,7 +26,7 @@ typedef enum{
 // Каждая инструкция хранит операцию и до трёх операндов: a, b и c.
 // Назначение операндов зависит от конкретной инструкции.
 // Регистры обозначаются числами от 0 до REGISTERS_COUNT - 1.
-// Адрес памяти хранится в регистре и должен быть от 0 до MEMORY_SIZE - 1.
+// Адрес памяти хранится в регистре и должен быть меньше memory->size.
 
 /*
 LOAD a, b:
@@ -101,7 +100,7 @@ typedef struct{
 void execute(Core *core, const Instruction *instruction, Memory *memory, Cache *cache, Cache *l2_cache, size_t program_size, Statistics *stats);
 bool checker_destination(uint32_t checkvar, Core *core, Statistics *stats);
 bool checker_address_register(uint32_t checkvar, Core *core, Statistics *stats);
-bool checker_memory_address(uint32_t checkvar, Core *core, Statistics *stats);
+bool checker_memory_address(uint32_t checkvar, const Memory *memory, Core *core, Statistics *stats);
 bool checker_source_register(uint32_t checkvar, Core *core, Statistics *stats);
 bool checker_condition_register(uint32_t checkvar, Core *core, Statistics *stats);
 bool checker_target_register(uint32_t checkvar, Core *core, Statistics *stats);

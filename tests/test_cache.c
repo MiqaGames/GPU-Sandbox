@@ -39,7 +39,7 @@ int main(){
     assert(decoded.tag == 1);
     assert(decoded.word_offset == 0);
 
-    assert(!cache_address_decode(&cache, MEMORY_SIZE, &decoded));
+    assert(cache_address_decode(&cache, UINT32_MAX, &decoded));
 
     CacheAddress first;
     CacheAddress second;
@@ -75,6 +75,7 @@ int main(){
     assert(cache.stats.evictions == 0);
 
     static Memory memory = {0};
+    assert(memory_init(&memory, 1024));
 
     cache_reset(&cache);
 
@@ -198,5 +199,6 @@ int main(){
 
     cache_destroy(&cache);
     cache_destroy(&l2_cache);
+    memory_destroy(&memory);
     return 0;
 }

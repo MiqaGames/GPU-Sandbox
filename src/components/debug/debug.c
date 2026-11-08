@@ -38,17 +38,18 @@ void print_cache_stats(const Cache *cache){
         printf("Cache statistics: unavailable\n");
         return;
     }
-    printf("Cache statistics: hits=%llu misses=%llu evictions=%llu\n",
-           (unsigned long long)cache->stats.hits,
-           (unsigned long long)cache->stats.misses,
-           (unsigned long long)cache->stats.evictions);
+    printf("Cache statistics: hits=%llu misses=%llu evictions=%llu\n", (unsigned long long)cache->stats.hits, (unsigned long long)cache->stats.misses, (unsigned long long)cache->stats.evictions);
 }
 
 
 
 void print_memory_state(const Memory *memory, uint32_t start_address, uint32_t end_address){
+    if (memory == NULL || memory->data == NULL || start_address > end_address || (size_t)end_address >= memory->size) {
+        printf("Memory range is unavailable\n");
+        return;
+    }
     printf("Memory state from address %u to %u:\n", start_address, end_address);
-    for (uint32_t address = start_address; address <= end_address; address++){
+    for (uint64_t address = start_address; address <= end_address; address++){
         printf("Address %u: %u\n", address, memory->data[address]);
     }
     printf("\n");

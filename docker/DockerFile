@@ -15,6 +15,8 @@ RUN mkdir -p /out && gcc -std=c11 -Wall -Wextra -I src \
     src/components/simulator/simulator.c \
     src/components/cache/cache.c \
     src/components/builder/builder.c \
+    src/components/config/config_decoder.c \
+    "src/external files/cJSON.c" \
     -o /out/app
 
 FROM alpine:3.22
@@ -22,5 +24,6 @@ FROM alpine:3.22
 WORKDIR /app
 
 COPY --from=build /out/app ./app
+COPY --from=build /src/src/components/config/config.json ./src/components/config/config.json
 
 CMD ["./app"]

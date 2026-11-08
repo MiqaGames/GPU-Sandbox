@@ -4,7 +4,7 @@
 #include "config_decoder.h"
 
 static const char *valid_json =
-    "{\"version\":1,\"cache\":{" 
+    "{\"version\":1,\"memory\":{\"size\":65536},\"program\":{\"max_program_size\":256},\"simulation\":{\"max_cycles\":1000000},\"cache\":{" 
     "\"l1\":{\"sets\":32,\"ways\":4,\"words_per_line\":8},"
     "\"l2\":{\"sets\":128,\"ways\":8,\"words_per_line\":16}}}";
 
@@ -19,6 +19,9 @@ static void test_parse_valid_json(void) {
     assert(config.l2.sets == 128);
     assert(config.l2.ways == 8);
     assert(config.l2.words_per_line == 16);
+    assert(config.memory_size == 65536);
+    assert(config.max_program_size == 256);
+    assert(config.max_cycles == 1000000);
 }
 
 static void test_parse_invalid_json(void) {
@@ -30,7 +33,7 @@ static void test_parse_invalid_json(void) {
 
     error[0] = '\0';
     assert(!config_parse_json(
-        "{\"version\":2,\"cache\":{" 
+        "{\"version\":2,\"memory\":{\"size\":65536},\"program\":{\"max_program_size\":256},\"simulation\":{\"max_cycles\":1000000},\"cache\":{" 
         "\"l1\":{\"sets\":32,\"ways\":4,\"words_per_line\":8},"
         "\"l2\":{\"sets\":128,\"ways\":8,\"words_per_line\":16}}}",
         &config, error, sizeof(error)));
@@ -38,7 +41,7 @@ static void test_parse_invalid_json(void) {
 
     error[0] = '\0';
     assert(!config_parse_json(
-        "{\"version\":1,\"cache\":{" 
+        "{\"version\":1,\"memory\":{\"size\":65536},\"program\":{\"max_program_size\":256},\"simulation\":{\"max_cycles\":1000000},\"cache\":{" 
         "\"l1\":{\"sets\":32,\"ways\":1,\"words_per_line\":8},"
         "\"l2\":{\"sets\":128,\"ways\":8,\"words_per_line\":16}}}",
         &config, error, sizeof(error)));
@@ -46,7 +49,7 @@ static void test_parse_invalid_json(void) {
 
     error[0] = '\0';
     assert(!config_parse_json(
-        "{\"version\":1,\"cache\":{" 
+        "{\"version\":1,\"memory\":{\"size\":65536},\"program\":{\"max_program_size\":256},\"simulation\":{\"max_cycles\":1000000},\"cache\":{" 
         "\"l1\":{\"sets\":32.5,\"ways\":4,\"words_per_line\":8},"
         "\"l2\":{\"sets\":128,\"ways\":8,\"words_per_line\":16}}}",
         &config, error, sizeof(error)));
@@ -68,6 +71,9 @@ static void test_load_config_file(void) {
     assert(config.l2.sets == 128);
     assert(config.l2.ways == 8);
     assert(config.l2.words_per_line == 16);
+    assert(config.memory_size == 262144);
+    assert(config.max_program_size == 256);
+    assert(config.max_cycles == 1000000);
 }
 
 int main(void) {

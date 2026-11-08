@@ -19,9 +19,12 @@ int main()
 
     {
         Core core = {0};
-        assert(checker_memory_address(0, &core, &stats) == true);
+        static Memory address_memory = {0};
+        assert(memory_init(&address_memory, 16));
+        assert(checker_memory_address(0, &address_memory, &core, &stats) == true);
         core.current_state = NORMAL;
-        assert(checker_memory_address(MEMORY_SIZE, &core, &stats) == false && core.current_state == ERROR);
+        assert(checker_memory_address(16, &address_memory, &core, &stats) == false && core.current_state == ERROR);
+        memory_destroy(&address_memory);
     }
 
     {
@@ -34,6 +37,7 @@ int main()
     {
         Core core = {0};
         static Memory memory = {0};
+        assert(memory_init(&memory, 64));
         memory_write(&memory, 10, 77);
         core.registers[1] = 10;
 
@@ -42,17 +46,20 @@ int main()
         assert(core.registers[0] == 77 && core.current_state == NORMAL);
         assert(empty_cache.stats.misses == 1);
         assert(empty_cache.stats.hits == 0);
+        memory_destroy(&memory);
     }
 
     {
         Core store_core = {0};
         static Memory store_memory = {0};
+        assert(memory_init(&store_memory, 64));
         store_core.registers[0] = 20;
         store_core.registers[1] = 11;
 
         Instruction store = {OP_STORE, 0, 1, 0};
         execute(&store_core, &store, &store_memory, &empty_cache, NULL, 1, &stats);
         assert(memory_read(&store_memory, 20) == 11 && store_core.current_state == NORMAL);
+        memory_destroy(&store_memory);
     }
 
     {

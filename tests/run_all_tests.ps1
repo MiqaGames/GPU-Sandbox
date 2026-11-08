@@ -40,7 +40,7 @@ $jobs = @(
     },
     @{
         Name = "cache";
-        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_cache.c"), (Join-Path $root "src/components/cache/cache.c"), "-o", (Join-Path $testsDir "test_cache.exe"));
+        Build = @($gcc, "-std=c11", "-I", $src, (Join-Path $testsDir "test_cache.c"), (Join-Path $root "src/components/cache/cache.c"), (Join-Path $root "src/components/memory/memory.c"), "-o", (Join-Path $testsDir "test_cache.exe"));
         Run = (Join-Path $testsDir "test_cache.exe")
     },
     @{
@@ -126,3 +126,7 @@ exit 0
 # gP6I7Uiaxx14tDnb59G3RU8EWitDVojQLbVxpLML3aDkWT9m6MuwMGO3nQpwt8AT
 # BB5RHgQ/MHiSuQ8=
 # SIG # End signature block
+
+
+
+# To run & .\tests\run_all_tests.ps1
