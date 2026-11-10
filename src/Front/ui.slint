@@ -1,0 +1,459 @@
+import { Button } from "std-widgets.slint";
+
+export component MainWindow inherits Window {
+	title: "MicroLab | Simulator";
+	min-width: 1080px;
+	min-height: 720px;
+	background: #f1f2eb;
+
+	in-out property <int> cycle-count: 0;
+	in-out property <int> pc-value: 0;
+	in-out property <int> executed-count: 0;
+	in-out property <int> reg0: 100;
+	in-out property <string> reg0-hex: "0x00000064";
+	in-out property <int> reg1: 200;
+	in-out property <string> reg1-hex: "0x000000C8";
+	in-out property <int> reg2: 0;
+	in-out property <string> reg2-hex: "0x00000000";
+	in-out property <int> reg3: 0;
+	in-out property <string> reg3-hex: "0x00000000";
+	in-out property <int> memory-word-4: 5;
+	in-out property <int> l1-hits: 0;
+	in-out property <int> l1-misses: 0;
+	in-out property <int> l1-evictions: 0;
+	in-out property <string> l1-rate: "0.0%";
+	in-out property <string> task-status: "WORKING";
+	in-out property <string> compare-flag: "SAME";
+	in-out property <string> current-instruction: "LOAD R4, [R0]";
+
+	callback step-requested();
+	callback run-requested();
+	callback reset-requested();
+
+	VerticalLayout {
+		spacing: 0px;
+
+		Rectangle {
+			height: 66px;
+			background: #202b27;
+
+			HorizontalLayout {
+				padding-left: 24px;
+				padding-right: 24px;
+				spacing: 14px;
+
+				Rectangle {
+					width: 34px;
+					height: 34px;
+					background: #c6ec74;
+					border-radius: 5px;
+					Text {
+						text: "M";
+						color: #202b27;
+						font-family: "Bahnschrift";
+						font-size: 21px;
+						font-weight: 700;
+						horizontal-alignment: center;
+						vertical-alignment: center;
+					}
+				}
+
+				Text {
+					text: "Test";
+					color: #f4f5ef;
+					font-family: "Bahnschrift";
+					font-size: 17px;
+					font-weight: 700;
+					vertical-alignment: center;
+				}
+
+				Rectangle { width: 1px; height: 24px; background: #4a5751; }
+
+				Text {
+					text: "PROCESSOR SIMULATOR";
+					color: #aab5ad;
+					font-size: 11px;
+					font-weight: 700;
+					vertical-alignment: center;
+				}
+
+				Rectangle { horizontal-stretch: 1; }
+
+				Rectangle {
+					width: 94px;
+					height: 28px;
+					background: #35423c;
+					border-radius: 4px;
+					Text {
+						text: "●  PREVIEW";
+						color: #c6ec74;
+						font-size: 10px;
+						font-weight: 700;
+						horizontal-alignment: center;
+						vertical-alignment: center;
+					}
+				}
+
+				Text {
+					text: "v0.1";
+					color: #7f8c84;
+					font-family: "Cascadia Code";
+					font-size: 11px;
+					vertical-alignment: center;
+				}
+			}
+		}
+
+		HorizontalLayout {
+			spacing: 0px;
+
+			Rectangle {
+				width: 210px;
+				background: #e7e9e1;
+
+				VerticalLayout {
+					padding: 18px;
+					spacing: 5px;
+
+					Text {
+						text: "WORKSPACE";
+						color: #88938a;
+						font-size: 10px;
+						font-weight: 700;
+						height: 28px;
+						vertical-alignment: center;
+					}
+
+					Rectangle {
+						height: 40px;
+						background: #d8e6c6;
+						border-radius: 4px;
+						HorizontalLayout {
+							padding-left: 12px;
+							spacing: 10px;
+							Text { text: "▦"; color: #3d5a39; font-size: 16px; vertical-alignment: center; }
+							Text { text: "Overview"; color: #25352c; font-size: 13px; font-weight: 700; vertical-alignment: center; }
+						}
+					}
+
+					Rectangle {
+						height: 40px;
+						background: transparent;
+						HorizontalLayout {
+							padding-left: 12px;
+							spacing: 10px;
+							Text { text: "≡"; color: #77847a; font-size: 16px; vertical-alignment: center; }
+							Text { text: "Instruction trace"; color: #59665d; font-size: 13px; vertical-alignment: center; }
+						}
+					}
+
+					Rectangle {
+						height: 40px;
+						background: transparent;
+						HorizontalLayout {
+							padding-left: 12px;
+							spacing: 10px;
+							Text { text: "▤"; color: #77847a; font-size: 16px; vertical-alignment: center; }
+							Text { text: "Memory map"; color: #59665d; font-size: 13px; vertical-alignment: center; }
+						}
+					}
+
+					Rectangle {
+						height: 40px;
+						background: transparent;
+						HorizontalLayout {
+							padding-left: 12px;
+							spacing: 10px;
+							Text { text: "▥"; color: #77847a; font-size: 16px; vertical-alignment: center; }
+							Text { text: "Cache lab"; color: #59665d; font-size: 13px; vertical-alignment: center; }
+						}
+					}
+
+					Rectangle { vertical-stretch: 1; }
+
+					Rectangle {
+						height: 1px;
+						background: #d1d6cc;
+					}
+
+					Text {
+						text: "ACTIVE WORKLOAD";
+						color: #88938a;
+						font-size: 10px;
+						font-weight: 700;
+						height: 34px;
+						vertical-alignment: center;
+					}
+
+					Rectangle {
+						height: 58px;
+						background: #f2f3ee;
+						border-width: 1px;
+						border-color: #d6dbd1;
+						border-radius: 4px;
+						VerticalLayout {
+							padding: 8px;
+							spacing: 3px;
+							Text { text: "dot_product"; color: #2d3932; font-family: "Cascadia Code"; font-size: 11px; font-weight: 700; }
+							Text { text: "1 task · 1 core"; color: #7b877d; font-size: 10px; }
+						}
+					}
+				}
+			}
+
+			Rectangle {
+				background: #f1f2eb;
+				VerticalLayout {
+					padding: 24px;
+					spacing: 16px;
+
+					HorizontalLayout {
+						height: 66px;
+						spacing: 12px;
+						VerticalLayout {
+							spacing: 4px;
+							Text { text: "Simulation overview"; color: #202b27; font-family: "Bahnschrift"; font-size: 25px; font-weight: 700; }
+							Text { text: "Runtime state · dot_product · core 0"; color: #7b877d; font-size: 12px; }
+						}
+						Rectangle { horizontal-stretch: 1; }
+						Button {
+							text: "↺  Reset";
+							clicked => { root.reset-requested(); }
+						}
+						Button {
+							text: "Step  →";
+							clicked => { root.step-requested(); }
+						}
+						Button {
+							text: "▶  Run 10";
+							clicked => { root.run-requested(); }
+						}
+					}
+
+					HorizontalLayout {
+						height: 86px;
+						spacing: 12px;
+
+						Rectangle {
+							horizontal-stretch: 1;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 13px;
+								spacing: 5px;
+								Text { text: "SIMULATOR CYCLES"; color: #7d897f; font-size: 10px; font-weight: 700; }
+								Text { text: root.cycle-count; color: #202b27; font-family: "Cascadia Code"; font-size: 22px; font-weight: 700; }
+							}
+						}
+
+						Rectangle {
+							horizontal-stretch: 1;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 13px;
+								spacing: 5px;
+								Text { text: "INSTRUCTIONS"; color: #7d897f; font-size: 10px; font-weight: 700; }
+								Text { text: root.executed-count; color: #202b27; font-family: "Cascadia Code"; font-size: 22px; font-weight: 700; }
+							}
+						}
+
+						Rectangle {
+							horizontal-stretch: 1;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 13px;
+								spacing: 5px;
+								Text { text: "ACTIVE CORES"; color: #7d897f; font-size: 10px; font-weight: 700; }
+								HorizontalLayout {
+									spacing: 8px;
+									Text { text: "1"; color: #202b27; font-family: "Cascadia Code"; font-size: 22px; font-weight: 700; }
+										Text { text: "of 1"; color: #89938b; font-size: 12px; vertical-alignment: bottom; }
+								}
+							}
+						}
+
+						Rectangle {
+							horizontal-stretch: 1;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 13px;
+								spacing: 5px;
+								Text { text: "TASK STATUS"; color: #7d897f; font-size: 10px; font-weight: 700; }
+								Text { text: root.task-status; color: #527b38; font-family: "Cascadia Code"; font-size: 17px; font-weight: 700; }
+							}
+						}
+					}
+
+					HorizontalLayout {
+						height: 312px;
+						spacing: 12px;
+
+						Rectangle {
+							horizontal-stretch: 6;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 16px;
+								spacing: 8px;
+								HorizontalLayout {
+									height: 30px;
+									Text { text: "INSTRUCTION TRACE"; color: #59665d; font-size: 10px; font-weight: 700; vertical-alignment: center; }
+									Rectangle { horizontal-stretch: 1; }
+									Text { text: "15 instructions"; color: #9aa39b; font-size: 10px; vertical-alignment: center; }
+								}
+								Rectangle { height: 1px; background: #e7e9e2; }
+
+								HorizontalLayout {
+									height: 26px;
+									Text { text: "PC"; width: 52px; color: #929b93; font-family: "Cascadia Code"; font-size: 10px; vertical-alignment: center; }
+									Text { text: "INSTRUCTION"; horizontal-stretch: 1; color: #929b93; font-size: 10px; font-weight: 700; vertical-alignment: center; }
+									Text { text: "OPERATION"; width: 84px; color: #929b93; font-size: 10px; font-weight: 700; vertical-alignment: center; }
+								}
+
+								HorizontalLayout {
+									height: 30px;
+									Rectangle { width: 3px; height: 22px; background: #c6ec74; }
+									Text { text: root.pc-value; width: 49px; color: #40563b; font-family: "Cascadia Code"; font-size: 11px; font-weight: 700; vertical-alignment: center; horizontal-alignment: center; }
+									Text { text: root.current-instruction; horizontal-stretch: 1; color: #26342c; font-family: "Cascadia Code"; font-size: 11px; font-weight: 700; vertical-alignment: center; }
+									Text { text: "multiply"; width: 84px; color: #8d978f; font-size: 10px; vertical-alignment: center; }
+								}
+								HorizontalLayout { height: 28px; Text { text: "06"; width: 52px; color: #9aa39b; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; horizontal-alignment: center; } Text { text: "ADD  R3, R3, R4"; horizontal-stretch: 1; color: #69756c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: "addition"; width: 84px; color: #9aa39b; font-size: 10px; vertical-alignment: center; } }
+								HorizontalLayout { height: 28px; Text { text: "07"; width: 52px; color: #9aa39b; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; horizontal-alignment: center; } Text { text: "ADD  R0, R0, R7"; horizontal-stretch: 1; color: #69756c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: "addition"; width: 84px; color: #9aa39b; font-size: 10px; vertical-alignment: center; } }
+								HorizontalLayout { height: 28px; Text { text: "08"; width: 52px; color: #9aa39b; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; horizontal-alignment: center; } Text { text: "ADD  R1, R1, R7"; horizontal-stretch: 1; color: #69756c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: "addition"; width: 84px; color: #9aa39b; font-size: 10px; vertical-alignment: center; } }
+								HorizontalLayout { height: 28px; Text { text: "09"; width: 52px; color: #9aa39b; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; horizontal-alignment: center; } Text { text: "ADD  R2, R2, R7"; horizontal-stretch: 1; color: #69756c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: "addition"; width: 84px; color: #9aa39b; font-size: 10px; vertical-alignment: center; } }
+								HorizontalLayout { height: 28px; Text { text: "10"; width: 52px; color: #9aa39b; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; horizontal-alignment: center; } Text { text: "CMP  R2, R6"; horizontal-stretch: 1; color: #69756c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: "compare"; width: 84px; color: #9aa39b; font-size: 10px; vertical-alignment: center; } }
+								HorizontalLayout { height: 28px; Text { text: "11"; width: 52px; color: #9aa39b; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; horizontal-alignment: center; } Text { text: "JIF  00, LESS"; horizontal-stretch: 1; color: #69756c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: "branch"; width: 84px; color: #9aa39b; font-size: 10px; vertical-alignment: center; } }
+								Rectangle { vertical-stretch: 1; }
+								HorizontalLayout {
+									height: 24px;
+									Rectangle { width: 7px; height: 7px; background: #9ac85d; border-radius: 4px; }
+									Text { text: "CURRENT INSTRUCTION"; color: #7e8a80; font-size: 9px; font-weight: 700; vertical-alignment: center; }
+									Rectangle { horizontal-stretch: 1; }
+									Text { text: "NEXT: ADD R3, R3, R4"; color: #7e8a80; font-family: "Cascadia Code"; font-size: 9px; vertical-alignment: center; }
+								}
+							}
+						}
+
+						Rectangle {
+							horizontal-stretch: 5;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 16px;
+								spacing: 9px;
+								HorizontalLayout {
+									height: 30px;
+									Text { text: "CORE 0"; color: #26342c; font-family: "Bahnschrift"; font-size: 15px; font-weight: 700; vertical-alignment: center; }
+									Rectangle { horizontal-stretch: 1; }
+									Text { text: "●  " + root.task-status; color: #5d8a43; font-size: 9px; font-weight: 700; vertical-alignment: center; }
+								}
+								Rectangle { height: 1px; background: #e7e9e2; }
+								HorizontalLayout {
+									height: 42px;
+									Rectangle {
+										horizontal-stretch: 1;
+										background: #f3f5ef;
+										border-radius: 3px;
+										VerticalLayout { padding: 6px; spacing: 2px; Text { text: "PROGRAM COUNTER"; color: #89938a; font-size: 8px; font-weight: 700; } Text { text: root.pc-value; color: #26342c; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } }
+									}
+									Rectangle { width: 8px; }
+									Rectangle {
+										horizontal-stretch: 1;
+										background: #f3f5ef;
+										border-radius: 3px;
+										VerticalLayout { padding: 6px; spacing: 2px; Text { text: "COMPARE FLAG"; color: #89938a; font-size: 8px; font-weight: 700; } Text { text: root.compare-flag; color: #b05d43; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } }
+									}
+								}
+								Text { text: "REGISTERS"; color: #7d897f; font-size: 9px; font-weight: 700; height: 18px; vertical-alignment: center; }
+								HorizontalLayout { height: 31px; Rectangle { width: 44px; background: #edf0e8; border-radius: 3px; Text { text: "R0"; color: #56645a; font-family: "Cascadia Code"; font-size: 10px; font-weight: 700; horizontal-alignment: center; vertical-alignment: center; } } Rectangle { width: 8px; } Text { text: root.reg0; horizontal-stretch: 1; color: #26342c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: root.reg0-hex; color: #9ba49c; font-family: "Cascadia Code"; font-size: 9px; vertical-alignment: center; } }
+								HorizontalLayout { height: 31px; Rectangle { width: 44px; background: #edf0e8; border-radius: 3px; Text { text: "R1"; color: #56645a; font-family: "Cascadia Code"; font-size: 10px; font-weight: 700; horizontal-alignment: center; vertical-alignment: center; } } Rectangle { width: 8px; } Text { text: root.reg1; horizontal-stretch: 1; color: #26342c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: root.reg1-hex; color: #9ba49c; font-family: "Cascadia Code"; font-size: 9px; vertical-alignment: center; } }
+								HorizontalLayout { height: 31px; Rectangle { width: 44px; background: #edf0e8; border-radius: 3px; Text { text: "R2"; color: #56645a; font-family: "Cascadia Code"; font-size: 10px; font-weight: 700; horizontal-alignment: center; vertical-alignment: center; } } Rectangle { width: 8px; } Text { text: root.reg2; horizontal-stretch: 1; color: #26342c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: root.reg2-hex; color: #9ba49c; font-family: "Cascadia Code"; font-size: 9px; vertical-alignment: center; } }
+								HorizontalLayout { height: 31px; Rectangle { width: 44px; background: #edf0e8; border-radius: 3px; Text { text: "R3"; color: #56645a; font-family: "Cascadia Code"; font-size: 10px; font-weight: 700; horizontal-alignment: center; vertical-alignment: center; } } Rectangle { width: 8px; } Text { text: root.reg3; horizontal-stretch: 1; color: #26342c; font-family: "Cascadia Code"; font-size: 11px; vertical-alignment: center; } Text { text: root.reg3-hex; color: #9ba49c; font-family: "Cascadia Code"; font-size: 9px; vertical-alignment: center; } }
+							}
+						}
+					}
+
+					HorizontalLayout {
+						vertical-stretch: 1;
+						spacing: 12px;
+
+						Rectangle {
+							horizontal-stretch: 6;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 16px;
+								spacing: 10px;
+								HorizontalLayout {
+									height: 28px;
+									Text { text: "MEMORY WINDOW"; color: #59665d; font-size: 10px; font-weight: 700; vertical-alignment: center; }
+									Rectangle { horizontal-stretch: 1; }
+									Text { text: "ADDRESS  0x0064 — 0x006B"; color: #929b93; font-family: "Cascadia Code"; font-size: 9px; vertical-alignment: center; }
+								}
+								HorizontalLayout {
+									vertical-stretch: 1;
+									spacing: 6px;
+									Rectangle { horizontal-stretch: 1; background: #f4f6f1; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "0064"; color: #8b968d; font-family: "Cascadia Code"; font-size: 9px; } Text { text: "1"; color: #344139; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+									Rectangle { horizontal-stretch: 1; background: #f4f6f1; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "0065"; color: #8b968d; font-family: "Cascadia Code"; font-size: 9px; } Text { text: "2"; color: #344139; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+									Rectangle { horizontal-stretch: 1; background: #f4f6f1; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "0066"; color: #8b968d; font-family: "Cascadia Code"; font-size: 9px; } Text { text: "3"; color: #344139; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+									Rectangle { horizontal-stretch: 1; background: #f4f6f1; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "0067"; color: #8b968d; font-family: "Cascadia Code"; font-size: 9px; } Text { text: "4"; color: #344139; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+									Rectangle { horizontal-stretch: 1; background: #e5efd8; border-width: 1px; border-color: #c6dfaa; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "0068"; color: #688151; font-family: "Cascadia Code"; font-size: 9px; } Text { text: root.memory-word-4; color: #3f5d31; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+									Rectangle { horizontal-stretch: 1; background: #f4f6f1; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "0069"; color: #8b968d; font-family: "Cascadia Code"; font-size: 9px; } Text { text: "6"; color: #344139; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+									Rectangle { horizontal-stretch: 1; background: #f4f6f1; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "006A"; color: #8b968d; font-family: "Cascadia Code"; font-size: 9px; } Text { text: "7"; color: #344139; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+									Rectangle { horizontal-stretch: 1; background: #f4f6f1; border-radius: 3px; VerticalLayout { padding: 8px; spacing: 6px; Text { text: "006B"; color: #8b968d; font-family: "Cascadia Code"; font-size: 9px; } Text { text: "8"; color: #344139; font-family: "Cascadia Code"; font-size: 13px; font-weight: 700; } } }
+								}
+							}
+						}
+
+						Rectangle {
+							horizontal-stretch: 5;
+							background: #ffffff;
+							border-width: 1px;
+							border-color: #e0e3da;
+							border-radius: 5px;
+							VerticalLayout {
+								padding: 16px;
+								spacing: 11px;
+								HorizontalLayout {
+									height: 28px;
+									Text { text: "CACHE ACTIVITY"; color: #59665d; font-size: 10px; font-weight: 700; vertical-alignment: center; }
+									Rectangle { horizontal-stretch: 1; }
+									Text { text: "HIT RATE"; color: #929b93; font-size: 9px; font-weight: 700; vertical-alignment: center; }
+									Text { text: root.l1-rate; color: #4e743b; font-family: "Cascadia Code"; font-size: 12px; font-weight: 700; vertical-alignment: center; }
+								}
+								HorizontalLayout { height: 22px; Text { text: "L1  ·  4-way"; width: 82px; color: #59665d; font-size: 10px; vertical-alignment: center; } VerticalLayout { height: 22px; horizontal-stretch: 1; alignment: center; Rectangle { height: 7px; horizontal-stretch: 1; background: #e8ebe4; border-radius: 4px; Rectangle { width: 72%; height: 7px; background: #9bc85d; border-radius: 4px; } } } Text { text: "72%"; width: 34px; color: #657369; font-family: "Cascadia Code"; font-size: 9px; horizontal-alignment: right; vertical-alignment: center; } }
+								HorizontalLayout { height: 22px; Text { text: "L2  ·  8-way"; width: 82px; color: #59665d; font-size: 10px; vertical-alignment: center; } VerticalLayout { height: 22px; horizontal-stretch: 1; alignment: center; Rectangle { height: 7px; horizontal-stretch: 1; background: #e8ebe4; border-radius: 4px; Rectangle { width: 48%; height: 7px; background: #e2a36e; border-radius: 4px; } } } Text { text: "48%"; width: 34px; color: #657369; font-family: "Cascadia Code"; font-size: 9px; horizontal-alignment: right; vertical-alignment: center; } }
+								Rectangle { vertical-stretch: 1; }
+								HorizontalLayout {
+									height: 32px;
+									Rectangle { horizontal-stretch: 1; background: #f3f5ef; border-radius: 3px; VerticalLayout { padding: 5px; spacing: 1px; Text { text: "HITS"; color: #89938a; font-size: 8px; font-weight: 700; } Text { text: root.l1-hits; color: #3f5d31; font-family: "Cascadia Code"; font-size: 10px; font-weight: 700; } } }
+									Rectangle { width: 6px; }
+									Rectangle { horizontal-stretch: 1; background: #f3f5ef; border-radius: 3px; VerticalLayout { padding: 5px; spacing: 1px; Text { text: "MISSES"; color: #89938a; font-size: 8px; font-weight: 700; } Text { text: root.l1-misses; color: #ad6944; font-family: "Cascadia Code"; font-size: 10px; font-weight: 700; } } }
+									Rectangle { width: 6px; }
+									Rectangle { horizontal-stretch: 1; background: #f3f5ef; border-radius: 3px; VerticalLayout { padding: 5px; spacing: 1px; Text { text: "EVICTIONS"; color: #89938a; font-size: 8px; font-weight: 700; } Text { text: root.l1-evictions; color: #59665d; font-family: "Cascadia Code"; font-size: 10px; font-weight: 700; } } }
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

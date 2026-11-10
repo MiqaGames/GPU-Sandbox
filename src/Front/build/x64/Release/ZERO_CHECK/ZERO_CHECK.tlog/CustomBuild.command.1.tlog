@@ -1,0 +1,10 @@
+^C:\USERS\123\ONEDRIVE\DESKTOP\SCHOOL PROJECT\SRC\FRONT\BUILD\CMAKEFILES\1B347632E248D9F3CB51299DEDEDAE36\GENERATE.STAMP.RULE
+setlocal
+C:\Strawberry\c\bin\cmake.exe "-SC:/Users/123/OneDrive/Desktop/School Project/src/Front" "-BC:/Users/123/OneDrive/Desktop/School Project/src/Front/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/123/OneDrive/Desktop/School Project/src/Front/build/MicroLabFrontend.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

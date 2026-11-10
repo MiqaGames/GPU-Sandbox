@@ -1,0 +1,24 @@
+^C:\USERS\123\ONEDRIVE\DESKTOP\SCHOOL PROJECT\SRC\FRONT\BUILD\CMAKEFILES\46FEC7F624F8E56A7D5751A578A27FB0\UI.H.RULE
+setlocal
+cd "C:\Users\123\OneDrive\Desktop\School Project\src\Front\build"
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\Slint-cpp 1.18.1\bin\slint-compiler.exe" "C:/Users/123/OneDrive/Desktop/School Project/src/Front/ui.slint" -f cpp -o "C:/Users/123/OneDrive/Desktop/School Project/src/Front/build/ui.h" --style fluent --embed-resources=as-absolute-path --translation-domain=microlab "--cpp-file=C:/Users/123/OneDrive/Desktop/School Project/src/Front/build/slint_generated_ui_1.cpp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\123\ONEDRIVE\DESKTOP\SCHOOL PROJECT\SRC\FRONT\CMAKELISTS.TXT
+setlocal
+C:\Strawberry\c\bin\cmake.exe "-SC:/Users/123/OneDrive/Desktop/School Project/src/Front" "-BC:/Users/123/OneDrive/Desktop/School Project/src/Front/build" --check-stamp-file "C:/Users/123/OneDrive/Desktop/School Project/src/Front/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

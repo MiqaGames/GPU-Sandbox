@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\123\OneDrive\Desktop\School Project\src\Front\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\123\OneDrive\Desktop\School Project\src\components\core\core.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\123\OneDrive\Desktop\School Project\src\components\memory\memory.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\123\OneDrive\Desktop\School Project\src\components\instruction\instruction.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\123\OneDrive\Desktop\School Project\src\components\simulator\simulator.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\123\OneDrive\Desktop\School Project\src\components\cache\cache.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\slint_generated_ui_1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\ui.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\CMakeFiles\46fec7f624f8e56a7d5751a578a27fb0\ui.h.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\123\OneDrive\Desktop\School Project\src\Front\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{31914A7C-27B8-35FA-9539-060EF38760FC}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{AAA1EED2-58DD-381B-A40E-BF7B37AC543A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{CF650B45-2AA5-30E1-819B-01D4BCBE0B23}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

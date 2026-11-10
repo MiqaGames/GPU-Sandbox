@@ -1,0 +1,7 @@
+C:\Users\123\OneDrive\Desktop\School Project\src\Front\main.cpp;C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\microlab.dir\Release\main.obj
+C:\Users\123\OneDrive\Desktop\School Project\src\components\core\core.c;C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\microlab.dir\Release\core.obj
+C:\Users\123\OneDrive\Desktop\School Project\src\components\memory\memory.c;C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\microlab.dir\Release\memory.obj
+C:\Users\123\OneDrive\Desktop\School Project\src\components\instruction\instruction.c;C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\microlab.dir\Release\instruction.obj
+C:\Users\123\OneDrive\Desktop\School Project\src\components\simulator\simulator.c;C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\microlab.dir\Release\simulator.obj
+C:\Users\123\OneDrive\Desktop\School Project\src\components\cache\cache.c;C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\microlab.dir\Release\cache.obj
+C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\slint_generated_ui_1.cpp;C:\Users\123\OneDrive\Desktop\School Project\src\Front\build\microlab.dir\Release\slint_generated_ui_1.obj

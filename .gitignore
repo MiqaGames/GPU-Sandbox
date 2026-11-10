@@ -2,4 +2,4 @@
 *.exe
 *.txt
 *.o
-!src/Front/CMakeList.txt
+!src/Front/CMakeLists.txt
